@@ -10,10 +10,10 @@ LevelRenderer::LevelRenderer(Minecraft *mc, Textures *textures) {
 	this->unknown9 = -1;
 	this->textures = textures;
 	this->buffersCount = 34848;
-	this->bufferContent = new uint32_t[4 * this->buffersCount];
+	this->bufferContent = new uint32_t[this->buffersCount];
 	anGenBuffers(this->buffersCount, this->bufferContent);
 	printf("numBuffers: %d\n", this->buffersCount);
-	anGenBuffers(1, this->unknown10);
+	anGenBuffers(1, &this->unknown10);
 	this->generateSky();
 }
 

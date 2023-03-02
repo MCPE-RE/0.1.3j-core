@@ -39,7 +39,7 @@ public:
 
 	uint32_t buffersCount; // 208
 	uint32_t *bufferContent; // 212
-	uint32_t *unknown10; // 216
+	uint32_t unknown10; // 216
 
 	uint32_t skyVboId; // 220
 
