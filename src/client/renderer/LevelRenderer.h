@@ -3,10 +3,9 @@
 
 #include <stddef.h>
 #include <vector>
-#include "LevelListener.h"
-#include "Level.h"
+#include "../../LevelListener.h"
+#include "../../Level.h"
 #include "gles.h"
-#include "Minecraft.h"
 #include "Textures.h"
 #include "Tesselator.h"
 

@@ -1,4 +1,5 @@
 #include "LevelRenderer.h"
+#include "../../Minecraft.h"
 
 LevelRenderer::LevelRenderer(Minecraft *mc, Textures *textures) {
 	this->unknown0 = -9999.0f;
