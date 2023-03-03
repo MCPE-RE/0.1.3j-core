@@ -10,3 +10,14 @@ MouseDevice::MouseDevice() {
         this->states[i] = false;
     }
 }
+
+void MouseDevice::feed(uint8_t button, bool state, uint16_t x, uint16_t y) {
+    this->events.push_back(MouseAction(button, state, x, y, 0));
+    if (button) {
+        this->states[button] = state;
+    }
+    this->oldX = this->x;
+    this->oldY = this->y;
+    this->x = x;
+    this->y = y;
+}
