@@ -12,14 +12,14 @@ public:
     uint16_t y; // BYTE6
     uint16_t oldX; // BYTE8
     uint16_t oldY; // BYTE10
-    bool states[4]; // BYTE12
+    uint8_t buttonStates[4]; // BYTE12
     std::vector<MouseAction> events; // BYTE16
 
     MouseDevice();
 
-    void feed(uint8_t button, bool state, uint16_t x, uint16_t y);
+    void feed(uint8_t button, uint8_t buttonState, uint16_t x, uint16_t y);
 
-    bool getButtonState(uint32_t button);
+    uint8_t getButtonState(uint32_t button);
 
     MouseAction *getEvent();
 
