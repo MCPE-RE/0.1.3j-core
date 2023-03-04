@@ -7,7 +7,7 @@
 
 class MouseDevice {
 public:
-    uint32_t eventIndex; // BYTE0
+    int32_t eventIndex; // BYTE0
     uint16_t x; // BYTE4
     uint16_t y; // BYTE6
     uint16_t oldX; // BYTE8
