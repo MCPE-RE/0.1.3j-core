@@ -4,6 +4,7 @@
 #include "MouseDevice.h"
 
 class Mouse {
+public:
     static MouseDevice _instance;
 
     static void feed(uint8_t button, uint8_t buttonState, uint16_t x, uint16_t y);

@@ -1,5 +1,7 @@
 #include "Mouse.h"
 
+MouseDevice Mouse::_instance = MouseDevice();
+
 void Mouse::feed(uint8_t button, uint8_t buttonState, uint16_t x, uint16_t y) {
     Mouse::_instance.feed(button, buttonState, x, y);
 }
@@ -41,5 +43,5 @@ void Mouse::reset() {
 }
 
 void Mouse::reset2() {
-    Mouse::_instance..reset2();
+    Mouse::_instance.reset2();
 }
