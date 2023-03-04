@@ -13,7 +13,7 @@ public:
 
     DynamicTexture(int32_t tileSideSize);
 
-    virtual void tick();
+    virtual void tick() = 0;
 
     void bindTexture(Textures *textures);
 };
