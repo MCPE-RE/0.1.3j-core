@@ -82,6 +82,8 @@ public:
     uint32_t unknown25; // 3552
     bool touchScreenEnabled; // 3556
 
+    static bool useAmbientOcclusion;
+
 	Minecraft();
 
     void init();
@@ -91,6 +93,8 @@ public:
     void reloadOptions();
 
     bool isTouchScreen();
+
+    // void generateLevel(const std::string &name);
 
     void setScreen(Screen *screen);
 
