@@ -62,6 +62,10 @@ void Minecraft::update() {
     this->unknown3->render(0, 0, 0);
 }
 
+void Minecraft::tickInput() {
+    // if (this->unknown3 != NULL && this->unknown3->)
+}
+
 bool Minecraft::isTouchScreen() {
 	return this->touchScreenEnabled;
 }

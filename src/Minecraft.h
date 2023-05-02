@@ -94,6 +94,8 @@ public:
 
     bool isTouchScreen();
 
+    void tickInput();
+
     // void generateLevel(const std::string &name);
 
     void setScreen(Screen *screen);
