@@ -4,7 +4,7 @@
 Screen::Screen() {
 	this->width = 1;
 	this->height = 1;
-	this->unknown1 = false;
+	this->disallowEvents = false;
 	this->unknown2 = 0;
 	this->unknown3 = 0;
 }
@@ -66,7 +66,7 @@ void Screen::updateTabButtonSelection() {
 void Screen::confirmResult(bool unknown0, uint32_t unknown1) {}
 
 bool Screen::clearColorBuffer() {
-	return false;
+	return true;
 }
 
 void Screen::setSize(uint32_t width, uint32_t height) {

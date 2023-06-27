@@ -18,7 +18,7 @@ class Screen : public GuiComponent {
 public:
 	uint32_t width; // *((uint32_t *)this + 2)
 	uint32_t height; // *((uint32_t *)this + 3)
-	uint8_t unknown1; // *((uint8_t *)this + 16)
+	uint8_t disallowEvents; // *((uint8_t *)this + 16)
 	Minecraft *minecraft; // *((uint32_t *)this + 5)
 	std::vector<Button*> buttonList; // *((uint32_t *)this + 6)
 	std::vector<Button*> tabButtonList; // *((uint32_t *)this + 9)
