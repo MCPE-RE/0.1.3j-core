@@ -9,8 +9,6 @@ public:
 	Level *level; // 56
 
 	Entity(Level *level);
-
-	virtual ~Entity();
 };
 
 #endif

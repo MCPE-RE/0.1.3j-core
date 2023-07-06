@@ -1,4 +1,5 @@
 #include "MouseHandler.h"
+#include <cstddef>
 
 MouseHandler::MouseHandler() {
     this->turnInput = NULL;

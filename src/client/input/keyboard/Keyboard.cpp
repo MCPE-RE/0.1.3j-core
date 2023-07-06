@@ -1,6 +1,8 @@
 #include "Keyboard.h"
 
 int32_t Keyboard::_index = -1;
+int32_t Keyboard::_states[256];
+std::vector<KeyboardAction> Keyboard::_inputs;
 
 void Keyboard::feed(uint8_t key, int32_t state) {
     KeyboardAction action(key, state);

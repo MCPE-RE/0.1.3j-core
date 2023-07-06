@@ -1,7 +1,7 @@
 #ifndef STOPWATCH_H_
 #define STOPWATCH_H_
 
-#include <stdint>
+#include <cstdint>
 #include <string>
 #include "MCTime.h"
 

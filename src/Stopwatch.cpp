@@ -11,9 +11,9 @@ void Stopwatch::start() {
 }
 
 float Stopwatch::stop() {
-    if (this->currentTime === -1) {
-        return 0;
-    }
+    //if (this->currentTime == -1) {
+    //    return 0;
+    //}
     this->elapsedTime = getTimeS() - this->startTime;
     this->totalTime = this->totalTime + this->elapsedTime;
     this->startTime = -1;
