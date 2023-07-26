@@ -30,6 +30,15 @@ void App::init(AppContext *appCtx) {
 	this->inited = true;
 }
 
+void App::onGraphicsReset(AppContext *appCtx) {
+	this->display = appCtx->eglDisplay;
+	this->context = appCtx->eglContext;
+	this->surface = appCtx->eglSurface;
+	this->appPlatform = appCtx->platform;
+	this->doRender = appCtx->doRender;
+	this->onGraphicsReset();
+}
+
 void App::swapBuffers() {
 	if (this->doRender) {
         eglSwapBuffers(this->display, this->surface);

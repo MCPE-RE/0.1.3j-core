@@ -26,6 +26,10 @@ public:
 
 	void init(AppContext *appCtx);
 
+	void onGraphicsReset(AppContext *appCtx);
+
+	virtual void onGraphicsReset() = 0;  // todo: to confirm as a pure virtual
+
 	void draw();
 
 	void audioEngineOn();
