@@ -74,6 +74,17 @@ void Minecraft::reloadOptions() {
     
 }
 
+void Minecraft::onGraphicsReset() {
+    this->textures->clear();
+    this->font->onGraphicsReset();
+    // TODO: GUI
+    // TODO: Gamerenderer
+    if (this->levelRenderer)
+    {
+        this->levelRenderer->onGraphicsReset();
+    }
+}
+
 void Minecraft::setScreen(Screen *screen) {
 	if (this->unknown1) {
 		this->unknown2 = true;

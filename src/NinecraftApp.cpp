@@ -28,7 +28,7 @@ void NinecraftApp::initGLStates() {
 void NinecraftApp::onGraphicsReset() {
 	this->initGLStates();
 	Tesselator::instance.init();
-	// Minecraft::onGraphicsReset();
+	Minecraft::onGraphicsReset();
 }
 
 bool NinecraftApp::handleBack(bool param) {

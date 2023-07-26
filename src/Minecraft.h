@@ -92,6 +92,8 @@ public:
 
     void reloadOptions();
 
+    void onGraphicsReset();
+
     bool isTouchScreen();
 
     void tickInput();

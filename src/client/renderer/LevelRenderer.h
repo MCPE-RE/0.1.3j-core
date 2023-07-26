@@ -51,6 +51,10 @@ public:
     
     void generateSky();
 
+	void onGraphicsReset();
+
+	void allChanged();
+
     void tick();
 
     void setLevel(Level *level);

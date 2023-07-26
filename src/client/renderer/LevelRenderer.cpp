@@ -40,6 +40,17 @@ void LevelRenderer::tick() {
 	++this->tickCount;
 }
 
+void LevelRenderer::onGraphicsReset() {
+	this->generateSky();
+	anGenBuffers(this->buffersCount, this->bufferContent);
+	this->allChanged();
+}
+
+void LevelRenderer::allChanged() {
+	// TODO
+	// deleteChunks()
+}
+
 void LevelRenderer::setLevel(Level *level) {
     if (this->level != NULL) {
         this->level->removeListener(this);
