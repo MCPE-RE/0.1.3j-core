@@ -75,8 +75,6 @@ public:
 	void renderDirtBackground(int unknown);
 
 	void setSize(uint32_t width, uint32_t height);
-
-	void keyboardEvent();
 };
 
 #endif /* SCREEN_H_ */
