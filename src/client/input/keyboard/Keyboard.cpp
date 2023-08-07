@@ -23,7 +23,7 @@ bool Keyboard::isKeyDown(int32_t key) {
 }
 
 bool Keyboard::next() {
-    if (Keyboard::_index >= Keyboard::_inputs.size()) {
+    if (Keyboard::_index + 1 >= Keyboard::_inputs.size()) {
         return false;
     }
     ++Keyboard::_index;
