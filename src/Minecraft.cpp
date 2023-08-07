@@ -112,6 +112,10 @@ void Minecraft::setScreen(Screen *screen) {
 	}
 }
 
+bool Minecraft::isLevelGenerated() {
+    return this->level != nullptr && this->unknown5 != 1;
+}
+
 Minecraft::~Minecraft() {
 	// TODO Auto-generated destructor stub
 }

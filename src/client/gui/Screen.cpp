@@ -25,7 +25,7 @@ void Screen::init(Minecraft *mc, uint32_t width, uint32_t height) {
 
 void Screen::render(uint32_t x, uint32_t y, float unknown2) {
 	// TODO: third parameter
-	for (int i = 0; i < this->buttonList.size(); ++i) {
+	for (size_t i = 0; i < this->buttonList.size(); ++i) {
 		this->buttonList[i]->render(this->minecraft, x, y);
 	}
 }
@@ -39,8 +39,12 @@ void Screen::renderBackground() {
 }
 
 void Screen::renderBackground(uint32_t textureVOffset) {
-	// TODO: Minecraft::isLevelGenerated
-	this->fillGradient(0, 0, this->width, this->height, 0xC0101010, 0xD0101010);
+    if (this->minecraft->isLevelGenerated()) {
+        this->fillGradient(0, 0, this->width, this->height, 0xC0101010, 0xD0101010);
+    } else {
+        this->renderDirtBackground(textureVOffset);
+    }
+	
 }
 
 void Screen::renderDirtBackground(int textureVOffset) {
@@ -58,7 +62,7 @@ void Screen::renderDirtBackground(int textureVOffset) {
 
 void Screen::updateTabButtonSelection() {
     if (!this->minecraft->isTouchScreen()) {
-        for (int i = 0; i < this->tabButtonList.size(); ++i) {
+        for (size_t i = 0; i < this->tabButtonList.size(); ++i) {
             this->tabButtonList[i]->isHovered = this->buttonIndex == i;
 		    }
 	  }
@@ -93,7 +97,14 @@ void Screen::tick() {};
 void Screen::buttonClicked(Button *button) {}
 
 void Screen::updateEvents() {
-	// TODO: Keyboard
+    if (!this->disallowEvents) {
+        while (Mouse::next()) {
+            this->mouseEvent();
+        }
+        while (Keyboard::next()) {
+            this->keyboardEvent();
+        }
+    }
 }
 
 bool Screen::handleBackEvent(bool keepScreen) {
@@ -146,7 +157,7 @@ void Screen::mouseEvent() {
 
 void Screen::mouseClicked(uint32_t x, uint32_t y, uint32_t button) {
     if (button == 1) {
-        for (int i = 0; i < this->buttonList.size(); ++i) {
+        for (size_t i = 0; i < this->buttonList.size(); ++i) {
             Button *btn = this->buttonList[i];
             if (btn->clicked(this->minecraft, x, y)) {
                 btn->setPressed();
@@ -157,7 +168,17 @@ void Screen::mouseClicked(uint32_t x, uint32_t y, uint32_t button) {
 }
 
 void Screen::mouseReleased(uint32_t x, uint32_t y, uint32_t button) {
-	// TODO
+	if (this->pressedButton != nullptr && button == 1) {
+        for (size_t i = 0; i < this->buttonList.size(); ++i) {
+            Button *btn = this->buttonList[i];
+            if (btn == this->pressedButton && btn->clicked(this->minecraft, x, y)) {
+                this->buttonClicked(btn);
+                //this->minecraft->soundEngine->playUI("random.click", 1.0, 1.0);
+                this->pressedButton->released(x, y);
+            }
+        }
+        this->pressedButton = nullptr;
+    }
 }
 
 void Screen::keyboardEvent() {

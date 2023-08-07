@@ -102,6 +102,8 @@ public:
 
     void setScreen(Screen *screen);
 
+    bool isLevelGenerated();
+
 	virtual ~Minecraft();
 };
 
