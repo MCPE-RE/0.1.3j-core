@@ -1,13 +1,14 @@
 #include "Screen.h"
 #include "../../Minecraft.h"
 #include "../input/keyboard/Keyboard.h"
+#include "../input/mouse/Mouse.h"
 
 Screen::Screen() {
 	this->width = 1;
 	this->height = 1;
 	this->disallowEvents = false;
 	this->buttonIndex = 0;
-	this->unknown3 = 0;
+	this->pressedButton = nullptr;
 }
 
 void Screen::init() {}
@@ -131,14 +132,31 @@ void Screen::keyPressed(uint32_t key) {
 }
 
 void Screen::mouseEvent() {
-	// TODO: MouseAction, Mouse
+    MouseAction *action = Mouse::getEvent();
+    if (action->isButton()) {
+        int x = (this->width * action->x) / this->minecraft->width;
+        int y = (this->height * action->y) / this->minecraft->height;
+        if (Mouse::getEventButtonState()) {
+            this->mouseClicked(x, y - 1, Mouse::getEventButton());
+        } else {
+            this->mouseReleased(x, y - 1, Mouse::getEventButton());
+        }
+    }
 }
 
-void Screen::mouseClicked(uint32_t x, uint32_t y, uint32_t z) {
-	// TODO
+void Screen::mouseClicked(uint32_t x, uint32_t y, uint32_t button) {
+    if (button == 1) {
+        for (int i = 0; i < this->buttonList.size(); ++i) {
+            Button *btn = this->buttonList[i];
+            if (btn->clicked(this->minecraft, x, y)) {
+                btn->setPressed();
+                this->pressedButton = btn;
+            }
+        }
+    }
 }
 
-void Screen::mouseReleased(uint32_t x, uint32_t y, uint32_t z) {
+void Screen::mouseReleased(uint32_t x, uint32_t y, uint32_t button) {
 	// TODO
 }
 

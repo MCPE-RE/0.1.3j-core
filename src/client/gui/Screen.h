@@ -24,7 +24,7 @@ public:
 	std::vector<Button*> tabButtonList; // *((uint32_t *)this + 9)
 	uint32_t buttonIndex; // *((uint32_t *)this + 12)
 	Font *font; // *((uint32_t *)this + 13)
-	uint32_t unknown3; // *((uint32_t *)this + 14)
+	Button *pressedButton; // *((uint32_t *)this + 14)
 
 	Screen();
 
@@ -62,9 +62,9 @@ public:
 
 	virtual void buttonClicked(Button *button);
 
-	void mouseClicked(uint32_t x, uint32_t y, uint32_t z);
+	void mouseClicked(uint32_t x, uint32_t y, uint32_t button);
 
-	void mouseReleased(uint32_t x, uint32_t y, uint32_t z);
+	void mouseReleased(uint32_t x, uint32_t y, uint32_t button);
 
 	void renderBackground();
 
