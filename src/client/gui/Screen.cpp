@@ -1,11 +1,12 @@
 #include "Screen.h"
 #include "../../Minecraft.h"
+#include "../input/keyboard/Keyboard.h"
 
 Screen::Screen() {
 	this->width = 1;
 	this->height = 1;
 	this->disallowEvents = false;
-	this->unknown2 = 0;
+	this->buttonIndex = 0;
 	this->unknown3 = 0;
 }
 
@@ -55,12 +56,11 @@ void Screen::renderDirtBackground(int textureVOffset) {
 }
 
 void Screen::updateTabButtonSelection() {
-	if (!this->minecraft->isTouchScreen()) {
-		for (int i = 0; this->tabButtonList.size() > i; ++i) {
-			// TODO: figure out the + 54 thing
-			// this->tabButtonList[i] = this->unknown2 == i;
-		}
-	}
+    if (!this->minecraft->isTouchScreen()) {
+        for (int i = 0; i < this->tabButtonList.size(); ++i) {
+            this->tabButtonList[i]->isHovered = this->buttonIndex == i;
+		    }
+	  }
 }
 
 void Screen::confirmResult(bool unknown0, uint32_t unknown1) {}
@@ -95,12 +95,39 @@ void Screen::updateEvents() {
 	// TODO: Keyboard
 }
 
-bool Screen::handleBackEvent(bool unknown0) {
+bool Screen::handleBackEvent(bool keepScreen) {
 	return false;
 }
 
 void Screen::keyPressed(uint32_t key) {
-	// TODO
+    if (key == 0x1b) {
+        this->minecraft->setScreen(NULL);
+    }
+    if (this->minecraft->isTouchScreen() == false && this->tabButtonList.size() != 0) {
+        if (this->minecraft->options.keyMenuNext.keyCode == key) {
+            ++this->buttonIndex;
+            if (this->buttonIndex == this->tabButtonList.size()) {
+                this->buttonIndex = 0;
+            }
+        }
+        if (this->minecraft->options.keyMenuPrevious.keyCode == key) {
+            --this->buttonIndex;
+            if (this->buttonIndex == this->tabButtonList.size()) {
+                this->buttonIndex = 0;
+            }
+            if (this->buttonIndex == -1) {
+              this->buttonIndex = this->tabButtonList.size() - 1;
+            }
+        }
+        if (this->minecraft->options.keyMenuOk.keyCode == key) {
+            Button *btn = this->tabButtonList[this->buttonIndex];
+            if (btn->isUsable) {
+                //this->minecraft->soundEngine->playUI("random.click", 1.0, 1.0);
+                this->buttonClicked(btn);
+            }
+        }
+        this->updateTabButtonSelection();
+    }
 }
 
 void Screen::mouseEvent() {
@@ -115,6 +142,8 @@ void Screen::mouseReleased(uint32_t x, uint32_t y, uint32_t z) {
 	// TODO
 }
 
-Screen::~Screen() {
-	// TODO Auto-generated destructor stub
+void Screen::keyboardEvent() {
+	if (Keyboard::getEventKeyState() != 0) {
+		this->keyPressed(Keyboard::getEventKey());
+	}
 }

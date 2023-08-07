@@ -22,7 +22,7 @@ public:
 	Minecraft *minecraft; // *((uint32_t *)this + 5)
 	std::vector<Button*> buttonList; // *((uint32_t *)this + 6)
 	std::vector<Button*> tabButtonList; // *((uint32_t *)this + 9)
-	uint32_t unknown2; // *((uint32_t *)this + 12)
+	uint32_t buttonIndex; // *((uint32_t *)this + 12)
 	Font *font; // *((uint32_t *)this + 13)
 	uint32_t unknown3; // *((uint32_t *)this + 14)
 
@@ -42,7 +42,7 @@ public:
 
 	void keyPressed(uint32_t key);
 
-	bool handleBackEvent(bool unknown0);
+	bool handleBackEvent(bool keepScreen);
 
 	virtual void tick();
 
@@ -76,7 +76,7 @@ public:
 
 	void setSize(uint32_t width, uint32_t height);
 
-	virtual ~Screen();
+	void keyboardEvent();
 };
 
 #endif /* SCREEN_H_ */
