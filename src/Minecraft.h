@@ -58,9 +58,9 @@ public:
     void *mouseHandler; // 3376
     bool unknown16; // 3392
     // TODO: class PixelCalc
-    PixelCalc *guiPixelCalc; // 3396
+    PixelCalc guiPixelCalc; // 3396
     // TODO: class PixelCalc
-    PixelCalc *invGuiPixelCalc; // 3404
+    PixelCalc invGuiPixelCalc; // 3404
     // TODO: class HitResult
     void *hitResult; // 3412
     void *unknown28; // 3444

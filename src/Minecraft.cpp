@@ -135,8 +135,8 @@ void Minecraft::setSize(int32_t width, int32_t height) {
     AppPlatform *platform = this->platform();
     if (platform) {
         float ppm = platform->getPixelsPerMillimeter();
-        this->guiPixelCalc->setPixelsPerMillimeter(ppm);
-        this->invGuiPixelCalc->setPixelsPerMillimeter(ppm);
+        this->guiPixelCalc.setPixelsPerMillimeter(ppm);
+        this->invGuiPixelCalc.setPixelsPerMillimeter(ppm);
     }
 
     if (this->screen) {
