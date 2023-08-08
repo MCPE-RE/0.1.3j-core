@@ -36,6 +36,10 @@ public:
     void setupPositions();
 
     bool isInGameScreen();
+
+    void _updateLicense();
+
+    void tick();
 };
 
 #endif /* STARTMENUSCREEN_H_ */

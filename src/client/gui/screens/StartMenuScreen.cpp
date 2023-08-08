@@ -81,3 +81,11 @@ void StartMenuScreen::setupPositions() {
 bool StartMenuScreen::isInGameScreen() {
     return false;
 }
+
+void StartMenuScreen::_updateLicense() {
+    // TODO
+}
+
+void StartMenuScreen::tick() {
+    this->_updateLicense();
+}
