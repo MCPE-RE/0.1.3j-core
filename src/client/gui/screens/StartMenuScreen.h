@@ -31,11 +31,11 @@ public:
 
 	void render(uint32_t x, uint32_t y, float unknown2);
 
+    void buttonClicked(Button *button);
+
     void setupPositions();
 
     bool isInGameScreen();
-
-	virtual ~StartMenuScreen();
 };
 
 #endif /* STARTMENUSCREEN_H_ */

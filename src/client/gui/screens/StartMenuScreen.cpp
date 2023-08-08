@@ -1,4 +1,5 @@
 #include "StartMenuScreen.h"
+#include "OptionsScreen.h"
 #include "../../../Minecraft.h"
 
 StartMenuScreen::StartMenuScreen() :
@@ -17,6 +18,7 @@ void StartMenuScreen::init() {
     this->tabButtonList.push_back(&this->startGameButton);
 	this->tabButtonList.push_back(&this->joinGameButton);
     this->tabButtonList.push_back(&this->optionsButton);
+    this->tabButtonList.push_back(&this->buyButton);
     this->copyright = "\xffMojang AB";
     this->gameVersion = "v0.1.3j alpha";
     /*this->optionsButton.isUsable = false;
@@ -48,6 +50,19 @@ void StartMenuScreen::render(uint32_t x, uint32_t y, float unknown2) {
     Screen::render(x, y, unknown2);
 }
 
+void StartMenuScreen::buttonClicked(Button *button) {
+    if (button->buttonId == this->startGameButton.buttonId) {
+        this->minecraft->screenChooser.setScreen(SELECT_WORLD);
+    } else if (button->buttonId == this->joinGameButton.buttonId) {
+        //this->minecraft->locateMultiplayer();
+        this->minecraft->screenChooser.setScreen(JOIN_GAME);
+    } else if (button->buttonId == this->optionsButton.buttonId) {
+        this->minecraft->setScreen(new OptionsScreen());
+    } else if (button->buttonId == this->buyButton.buttonId) {
+        this->minecraft->platform()->buyGame();
+    }
+}
+
 void StartMenuScreen::setupPositions() {
     this->startGameButton.y = this->height / 2 - 3;
     this->joinGameButton.y = this->height / 2 + 25;
@@ -65,8 +80,4 @@ void StartMenuScreen::setupPositions() {
 
 bool StartMenuScreen::isInGameScreen() {
     return false;
-}
-
-StartMenuScreen::~StartMenuScreen() {
-
 }
