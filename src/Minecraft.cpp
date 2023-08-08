@@ -1,6 +1,8 @@
 #include "Minecraft.h"
 #include "client/gui/Button.h"
 #include "client/gui/screens/StartMenuScreen.h"
+#include "client/gui/Gui.h"
+#include "client/input/keyboard/Keyboard.h"
 
 Minecraft::Minecraft() : screenChooser(this) {
     this->screen = NULL;
@@ -27,12 +29,9 @@ void Minecraft::init() {
 
     // "Init complete"
 }
-#include "client/input/keyboard/Keyboard.h"
 
 void Minecraft::update() {
-    this->width = this->platform()->getScreenWidth();
-    this->height = this->platform()->getScreenHeight();
-    float scale = (this->width <= 999) ? ((this->width <= 799) ? ((this->width <= 399) ? 1.0 : 0.5) : 0.33333) : 0.25f;
+    this->setSize(this->platform()->getScreenWidth(), this->platform()->getScreenHeight());
 
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -46,9 +45,9 @@ void Minecraft::update() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     #ifndef USE_DESKTOP_GL
-    glOrthof(0, this->platform()->getScreenWidth() * scale, this->platform()->getScreenHeight() * scale, 0, 2000.0, 3000.0);
+    glOrthof(0, this->platform()->getScreenWidth() * Gui::InvGuiScale, this->platform()->getScreenHeight() * Gui::InvGuiScale, 0, 2000.0, 3000.0);
     #else
-    glOrtho(0, this->platform()->getScreenWidth() * scale, this->platform()->getScreenHeight() * scale, 0, 2000.0, 3000.0);
+    glOrtho(0, this->platform()->getScreenWidth() * Gui::InvGuiScale, this->platform()->getScreenHeight() * Gui::InvGuiScale, 0, 2000.0, 3000.0);
     #endif
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -56,8 +55,6 @@ void Minecraft::update() {
     glTranslatef(0.0, 0.0, -2000.0);
 
     glClearColor(1, 1, 1, 1);
-
-    this->screen->setSize(this->width * scale, this->height * scale);
 
     this->screenInUse = true;
     this->screen->tick();
@@ -107,13 +104,50 @@ void Minecraft::setScreen(Screen *screen) {
             this->screen = screen;
             if (screen) {
                 // this->releaseMouse();
-                float scale = (this->width <= 999) ? ((this->width <= 799) ? ((this->width <= 399) ? 1.0 : 0.5) : 0.33333) : 0.25f;
-				screen->init(this, this->width * scale, this->height * scale);
+				uint32_t scaledWidth = (uint32_t)((float)this->width * Gui::InvGuiScale);
+                uint32_t scaledHeight = (uint32_t)((float)this->height * Gui::InvGuiScale);
+                screen->init(this, scaledWidth, scaledHeight);
             } else {
                 // this->grabMouse();
             }
         }
 	}
+}
+
+void Minecraft::setSize(int32_t width, int32_t height) {
+    this->width = width;
+    this->height = height;
+
+    if (this->width <= 999) {
+        if (this->width <= 799) {
+            if (this->width <= 399) {
+                Gui::InvGuiScale = 1.0;
+            } else {
+                Gui::InvGuiScale = 0.5;
+            }
+        } else {
+            Gui::InvGuiScale = 0.33333;
+        }
+    } else {
+        Gui::InvGuiScale = 0.25;
+    }
+
+    AppPlatform *platform = this->platform();
+    if (platform) {
+        float ppm = platform->getPixelsPerMillimeter();
+        this->guiPixelCalc->setPixelsPerMillimeter(ppm);
+        this->invGuiPixelCalc->setPixelsPerMillimeter(ppm);
+    }
+
+    if (this->screen) {
+        uint32_t scaledWidth = (uint32_t)((float)this->width * Gui::InvGuiScale);
+        uint32_t scaledHeight = (uint32_t)((float)this->height * Gui::InvGuiScale);
+        this->screen->setSize(scaledWidth, scaledHeight);
+    }
+
+    if (this->touchInputHolder) {
+        //this->touchInputHolder->setScreenSize(this->width, this->height);
+    }
 }
 
 bool Minecraft::isLevelGenerated() {

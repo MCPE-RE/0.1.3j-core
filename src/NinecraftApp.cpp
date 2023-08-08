@@ -1,6 +1,8 @@
 #include "NinecraftApp.h"
 #include "client/renderer/Tesselator.h"
 
+bool NinecraftApp::_hasInitedStatics = false;
+
 NinecraftApp::NinecraftApp() {
 	this->framesPerSecond = 0;
 }

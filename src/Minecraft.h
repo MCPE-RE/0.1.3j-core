@@ -9,6 +9,7 @@
 #include "client/gui/Screen.h"
 #include "client/gui/ScreenChooser.h"
 #include "Level.h"
+#include "PixelCalc.h"
 
 class Minecraft : public App {
 public:
@@ -57,9 +58,9 @@ public:
     void *mouseHandler; // 3376
     bool unknown16; // 3392
     // TODO: class PixelCalc
-    void *unknown10; // 3396
+    PixelCalc *guiPixelCalc; // 3396
     // TODO: class PixelCalc
-    void *unknown11; // 3404
+    PixelCalc *invGuiPixelCalc; // 3404
     // TODO: class HitResult
     void *hitResult; // 3412
     void *unknown28; // 3444
@@ -101,6 +102,8 @@ public:
     // void generateLevel(const std::string &name);
 
     void setScreen(Screen *screen);
+
+    void setSize(int32_t width, int32_t height);
 
     bool isLevelGenerated();
 

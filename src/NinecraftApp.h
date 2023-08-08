@@ -14,6 +14,8 @@
 
 class NinecraftApp : public Minecraft {
 public:
+    static bool _hasInitedStatics;
+    
     using Minecraft::init;
 
 	std::string absolutePathDirectory;
