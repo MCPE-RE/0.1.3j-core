@@ -60,6 +60,7 @@ void Minecraft::update() {
     this->screen->setSize(this->width * scale, this->height * scale);
 
     this->screenInUse = true;
+    this->screen->tick();
     this->screen->render(0, 0, 0);
     this->screen->updateEvents();
     Keyboard::reset();

@@ -1,6 +1,7 @@
 #include "StartMenuScreen.h"
 #include "OptionsScreen.h"
 #include "../../../Minecraft.h"
+#include "../../../LicenseCodes.h"
 
 StartMenuScreen::StartMenuScreen() :
     startGameButton(2, 0, 0, 160, 24, "Start Game"),
@@ -21,9 +22,9 @@ void StartMenuScreen::init() {
     this->tabButtonList.push_back(&this->buyButton);
     this->copyright = "\xffMojang AB";
     this->gameVersion = "v0.1.3j alpha";
-    /*this->optionsButton.isUsable = false;
+    this->optionsButton.isUsable = false;
     this->startGameButton.isUsable = false;
-    this->joinGameButton.isUsable = false;*/
+    this->joinGameButton.isUsable = false;
 }
 
 void StartMenuScreen::render(uint32_t x, uint32_t y, float unknown2) {
@@ -83,7 +84,22 @@ bool StartMenuScreen::isInGameScreen() {
 }
 
 void StartMenuScreen::_updateLicense() {
-    // TODO
+    //int32_t licenseId = this->minecraft->getLicenseId();
+    int32_t licenseId = 0;
+    if (LicenseCodes::isReady(licenseId)) {
+        if (LicenseCodes::isOk(licenseId)) {
+            this->optionsButton.isUsable = true;
+            this->startGameButton.isUsable = true;
+            this->joinGameButton.isUsable = true;
+        } else {
+            bool hasBuyButton = this->minecraft->platform()->hasBuyButtonWhenInvalidLicense();
+            //this->minecraft->setScreen(new InvalidLicenseScreen(licenseId, hasBuyButton));
+        }
+    } else {
+        this->optionsButton.isUsable = false;
+        this->startGameButton.isUsable = false;
+        this->joinGameButton.isUsable = false;
+    }
 }
 
 void StartMenuScreen::tick() {
