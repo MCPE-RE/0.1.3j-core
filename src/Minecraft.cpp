@@ -4,7 +4,10 @@
 #include "client/gui/Gui.h"
 #include "client/input/keyboard/Keyboard.h"
 
-Minecraft::Minecraft() : screenChooser(this) {
+Minecraft::Minecraft() :
+    screenChooser(this),
+    guiPixelCalc(1.0f),
+    invGuiPixelCalc(1.0f) {
     this->screen = NULL;
     this->screenInUse = 0;
 	// First field may be "joiningNetwork"
