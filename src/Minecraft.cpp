@@ -3,8 +3,8 @@
 #include "client/gui/screens/StartMenuScreen.h"
 
 Minecraft::Minecraft() : screenChooser(this) {
-    this->unknown3 = NULL;
-    this->unknown1 = 0;
+    this->screen = NULL;
+    this->screenInUse = 0;
 	// First field may be "joiningNetwork"
 
 	// Field after screen chooser is *Font
@@ -27,6 +27,7 @@ void Minecraft::init() {
 
     // "Init complete"
 }
+#include "client/input/keyboard/Keyboard.h"
 
 void Minecraft::update() {
     this->width = this->platform()->getScreenWidth();
@@ -56,10 +57,17 @@ void Minecraft::update() {
 
     glClearColor(1, 1, 1, 1);
 
-    this->unknown3->setSize(this->width * scale, this->height * scale);
+    this->screen->setSize(this->width * scale, this->height * scale);
 
-    this->unknown3->renderDirtBackground(0);
-    this->unknown3->render(0, 0, 0);
+    this->screenInUse = true;
+    this->screen->render(0, 0, 0);
+    this->screen->updateEvents();
+    Keyboard::reset();
+    this->screenInUse = false;
+    if (this->hasScreenToBeSet) {
+        this->hasScreenToBeSet = false;
+        this->setScreen(this->screenToBeSet);
+    }
 }
 
 void Minecraft::tickInput() {
@@ -67,7 +75,7 @@ void Minecraft::tickInput() {
 }
 
 bool Minecraft::isTouchScreen() {
-	return this->touchScreenEnabled;
+	return false; //this->touchScreenEnabled;
 }
 
 void Minecraft::reloadOptions() {
@@ -86,29 +94,24 @@ void Minecraft::onGraphicsReset() {
 }
 
 void Minecraft::setScreen(Screen *screen) {
-	if (this->unknown1) {
-		this->unknown2 = true;
-		this->currentScreen = screen;
+	if (this->screenInUse) {
+		this->hasScreenToBeSet = true;
+		this->screenToBeSet = screen;
 	} else {
-		if (!(screen && screen->isErrorScreen())) {
-			if (this->unknown3) {
-				this->unknown3->removed();
-				if (this->unknown3) {
-					// Destructor is called from the
-					// vtable, so that's my deduction
-					delete this->unknown3;
-				}
-			}
-			this->unknown3 = screen;
-			if (screen) {
-				// TODO: release mouse
-				// TODO: 0.33333 GUI constant value
+        if (!screen || !screen->isErrorScreen()) {
+            if (this->screen) {
+                this->screen->removed();
+                delete this->screen;
+            }
+            this->screen = screen;
+            if (screen) {
+                // this->releaseMouse();
                 float scale = (this->width <= 999) ? ((this->width <= 799) ? ((this->width <= 399) ? 1.0 : 0.5) : 0.33333) : 0.25f;
 				screen->init(this, this->width * scale, this->height * scale);
-			} else {
-				// TODO: grab mouse
-			}
-		}
+            } else {
+                // this->grabMouse();
+            }
+        }
 	}
 }
 

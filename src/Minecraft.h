@@ -52,7 +52,7 @@ public:
 
     // TODO: class CThread
     void *thread; // 3368
-    Screen *unknown3; // 3372
+    Screen *screen; // 3372
     // TODO: class MouseHandler
     void *mouseHandler; // 3376
     bool unknown16; // 3392
@@ -76,9 +76,9 @@ public:
     uint32_t unknown4; // 3532
     uint32_t unknown9; // 3536
     uint32_t unknown18; // 3540
-    uint8_t unknown1; // 3544
-    uint8_t unknown2; // 3545
-    Screen *currentScreen; // 3548
+    uint8_t screenInUse; // 3544
+    uint8_t hasScreenToBeSet; // 3545
+    Screen *screenToBeSet; // 3548
     uint32_t unknown25; // 3552
     bool touchScreenEnabled; // 3556
 
