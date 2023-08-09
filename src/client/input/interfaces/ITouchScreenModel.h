@@ -6,9 +6,9 @@
 
 class ITouchScreenModel {
 public:
-    virtual uint8_t getPointerId(const MouseAction *action);
+    virtual int32_t getPointerId(const MouseAction *action);
 
-    virtual uint8_t getPointerId(int32_t x, int32_t y, int32_t id);
+    virtual int32_t getPointerId(int32_t x, int32_t y, int32_t pointerId);
 };
 
 #endif

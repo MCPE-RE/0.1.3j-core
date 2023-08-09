@@ -11,7 +11,9 @@ public:
 
     IArea(const IArea& area);
 
-    virtual void operator=(const IArea& area);
+    virtual bool isInside(float x, float y) = 0;
+
+    void operator=(const IArea& area);
 };
 
 #endif
