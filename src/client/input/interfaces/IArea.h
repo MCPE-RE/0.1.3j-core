@@ -11,7 +11,7 @@ public:
 
     IArea(const IArea& area);
 
-    void operator=(const IArea& area);
+    virtual void operator=(const IArea& area);
 };
 
 #endif
