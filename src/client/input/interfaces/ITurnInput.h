@@ -9,7 +9,7 @@ public:
 
     ITurnInput();
 
-    float getDeltaTime();
+    virtual float getDeltaTime();
 
     static float linearTransform(float x, float y, float z, bool dbas);
 

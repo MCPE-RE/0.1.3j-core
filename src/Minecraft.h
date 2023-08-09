@@ -10,6 +10,7 @@
 #include "client/gui/ScreenChooser.h"
 #include "Level.h"
 #include "PixelCalc.h"
+#include "client/input/mouse/MouseHandler.h"
 
 class Minecraft : public App {
 public:
@@ -55,8 +56,8 @@ public:
     void *thread; // 3368
     Screen *screen; // 3372
     // TODO: class MouseHandler
-    void *mouseHandler; // 3376
-    bool unknown16; // 3392
+    MouseHandler *mouseHandler; // 3376
+    bool isMouseGrabbed; // 3392
     // TODO: class PixelCalc
     PixelCalc guiPixelCalc; // 3396
     // TODO: class PixelCalc

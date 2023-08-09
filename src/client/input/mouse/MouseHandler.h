@@ -2,7 +2,7 @@
 #define MOUSEHANDLER_H_
 
 #include <cstdint>
-#include "../ITurnInput.h"
+#include "../interfaces/ITurnInput.h"
 
 class MouseHandler {
 public:
