@@ -1,6 +1,16 @@
 #include "Multitouch.h"
 #include <cmath>
 
+int32_t Multitouch::_activePointerCount = 0;
+int32_t Multitouch::_activePointerList[12];
+int32_t Multitouch::_index = -1;
+std::vector<MouseAction> Multitouch::_inputs;
+MouseDevice Multitouch::_pointers[12];
+bool Multitouch::_wasPressed[12];
+bool Multitouch::_wasPressedThisUpdate[12];
+bool Multitouch::_wasReleased[12];
+bool Multitouch::_wasReleasedThisUpdate[12];
+
 int32_t Multitouch::_clampPointerId(int32_t pointerId) {
     if ((-1 < pointerId) && (0xb < pointerId)) {
         return 11;

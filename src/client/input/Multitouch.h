@@ -9,7 +9,7 @@
 class Multitouch {
 public:
     static int32_t _activePointerCount;
-    static int32_t *_activePointerList;
+    static int32_t _activePointerList[12];
     static int32_t _index;
     static std::vector<MouseAction> _inputs;
     static MouseDevice _pointers[12];
