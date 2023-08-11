@@ -7,9 +7,9 @@ class IMoveInput {
 public:
     int32_t x;
     int32_t y;
-    uint8_t unknown0;
     uint8_t unknown1;
     uint8_t unknown2;
+    uint8_t unknown3;
 
     IMoveInput();
 

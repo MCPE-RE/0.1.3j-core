@@ -33,6 +33,8 @@ void Minecraft::init() {
     // "Init complete"
 }
 
+#include "client/input/TouchscreenInput_TestFps.h"
+
 void Minecraft::update() {
     this->setSize(this->platform()->getScreenWidth(), this->platform()->getScreenHeight());
 
@@ -69,6 +71,9 @@ void Minecraft::update() {
         this->hasScreenToBeSet = false;
         this->setScreen(this->screenToBeSet);
     }
+
+    TouchscreenInput_TestFps test = TouchscreenInput_TestFps(this, &this->options);
+    test.render(0);
 }
 
 void Minecraft::tickInput() {

@@ -3,9 +3,9 @@
 IMoveInput::IMoveInput() {
     this->x = 0;
     this->y = 0;
-    this->unknown0 = 0;
     this->unknown1 = 0;
     this->unknown2 = 0;
+    this->unknown3 = 0;
 }
 
 void IMoveInput::releaseAllKeys() {}
