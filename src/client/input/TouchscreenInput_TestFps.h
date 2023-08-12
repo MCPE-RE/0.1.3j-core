@@ -24,7 +24,7 @@ public:
     PolygonArea *button0PolygonArea;
     PolygonArea *button1PolygonArea;
     PolygonArea *button4PolygonArea;
-    bool *buttonStates[8];
+    bool buttonStates[8];
 
     TouchscreenInput_TestFps(Minecraft *minecraft, Options *options);
 

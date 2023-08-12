@@ -3,6 +3,7 @@
 #include "../renderer/Tesselator.h"
 #include "../renderer/Textures.h"
 #include "../gui/Gui.h"
+#include "Multitouch.h"
 
 TouchscreenInput_TestFps::TouchscreenInput_TestFps(Minecraft *minecraft, Options *options) :
     rectangleArea(0.0f, 0.0f, 1.0f, 1.0f) {
@@ -29,7 +30,7 @@ RectangleArea TouchscreenInput_TestFps::getRectangleArea() {
 }
 
 bool TouchscreenInput_TestFps::isButtonDown(int32_t button) {
-    return (char *)&this->y + 8 + button;
+    return this->buttonStates[button - 100];
 }
 
 void TouchscreenInput_TestFps::releaseAllKeys() {
@@ -608,5 +609,71 @@ int __fastcall TouchscreenInput_TestFps::tick(TouchscreenInput_TestFps *this, Pl
 }
 */
 void TouchscreenInput_TestFps::tick(void *player) {
-
+    this->x = 0;
+    this->y = 0;
+    this->unknown2 = 0;
+    for (int i = 0; i < 5; ++i) {
+        this->buttonStates[i] = 0;
+    }
+    int32_t *activePointerIds = NULL;
+    bool onGround = false;
+    bool onGround2 = false;
+    for (int32_t i = 0; i < Multitouch::getActivePointerIds(&activePointerIds); ++i) {
+        int16_t x = Multitouch::getX(activePointerIds[i]);
+        int16_t y = Multitouch::getX(activePointerIds[i]);
+        int32_t pointerId = this->touchAreaModel.getPointerId(x, y, activePointerIds[i]);
+        if (pointerId > 99) {
+            this->buttonStates[pointerId - 100] = true;
+        }
+        if (pointerId == 105) {
+            if (1 == 1) { //if (player->isInWater()) {
+                this->unknown2 = 1;
+            } else {
+                onGround = true;
+            }
+            pointerId = 100;
+        }
+        if (pointerId == 104) {
+            if (1 == 1) { //if (player->isInWater()) {
+                this->unknown2 = 1;
+            } else {
+                if (Multitouch::isPressed(activePointerIds[i])) {
+                    this->unknown2 = 1;
+                } else if (this->uunknown1) {
+                    pointerId = 100;
+                    onGround = true;
+                    this->y += 1.0f;
+                }
+                
+            }
+        }
+        switch (pointerId) {
+        case 100:
+            if (1 == 1) { //if (player->isInWater()) {
+                this->unknown2 = 1;
+            } else {
+                onGround2 = true;
+            }
+            this->y += 1.0f;
+            break;
+        case 101:
+            this->y -= 1.0f;
+            break;
+        case 102:
+            this->x += 1.0f;
+            break;
+        case 103:
+            this->x -= 1.0f;
+            break;
+        }
+    }
+    this->uunknown1 = onGround2;
+    if (onGround) {
+        if (this->uunknown2 != 1) {
+            this->unknown2 = 1;
+        }
+        this->uunknown2 = 1;
+    } else {
+        this->uunknown2 = 0;
+    }
 }
