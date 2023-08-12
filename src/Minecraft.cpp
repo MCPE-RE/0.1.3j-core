@@ -3,6 +3,8 @@
 #include "client/gui/screens/StartMenuScreen.h"
 #include "client/gui/Gui.h"
 #include "client/input/keyboard/Keyboard.h"
+#include "client/input/mouse/Mouse.h"
+#include "client/input/Multitouch.h"
 
 Minecraft::Minecraft() :
     screenChooser(this),
@@ -66,14 +68,16 @@ void Minecraft::update() {
     this->screen->render(0, 0, 0);
     this->screen->updateEvents();
     Keyboard::reset();
+    Mouse::reset();
     this->screenInUse = false;
     if (this->hasScreenToBeSet) {
         this->hasScreenToBeSet = false;
         this->setScreen(this->screenToBeSet);
     }
-
     TouchscreenInput_TestFps test = TouchscreenInput_TestFps(this, &this->options);
+    test.tick(NULL);
     test.render(0);
+    
 }
 
 void Minecraft::tickInput() {
