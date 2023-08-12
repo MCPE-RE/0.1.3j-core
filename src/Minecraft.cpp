@@ -77,7 +77,7 @@ void Minecraft::update() {
     TouchscreenInput_TestFps test = TouchscreenInput_TestFps(this, &this->options);
     test.tick(NULL);
     test.render(0);
-    
+    Multitouch::reset();
 }
 
 void Minecraft::tickInput() {

@@ -1,5 +1,6 @@
 #include "NinecraftApp.h"
 #include "client/renderer/Tesselator.h"
+#include "client/input/Multitouch.h"
 
 bool NinecraftApp::_hasInitedStatics = false;
 
@@ -44,6 +45,7 @@ void NinecraftApp::init() {
 }
 
 void NinecraftApp::update() {
+    Multitouch::commit();
     Minecraft::update();
 }
 

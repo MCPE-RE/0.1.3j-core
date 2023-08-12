@@ -620,7 +620,7 @@ void TouchscreenInput_TestFps::tick(void *player) {
     bool onGround2 = false;
     for (int32_t i = 0; i < Multitouch::getActivePointerIds(&activePointerIds); ++i) {
         int16_t x = Multitouch::getX(activePointerIds[i]);
-        int16_t y = Multitouch::getX(activePointerIds[i]);
+        int16_t y = Multitouch::getY(activePointerIds[i]);
         int32_t pointerId = this->touchAreaModel.getPointerId(x, y, activePointerIds[i]);
         if (pointerId > 99) {
             this->buttonStates[pointerId - 100] = true;
