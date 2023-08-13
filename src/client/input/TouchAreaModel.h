@@ -1,5 +1,4 @@
-#ifndef TOUCHAREAMODEL_H_
-#define TOUCHAREAMODEL_H_
+#pragma once
 
 #include "interfaces/ITouchScreenModel.h"
 #include "interfaces/IArea.h"
@@ -23,5 +22,3 @@ public:
 
     int32_t getPointerId(int32_t x, int32_t y, int32_t pointerId);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef DYNAMICTEXTURE_H_
-#define DYNAMICTEXTURE_H_
+#pragma once
 
 #include <cstdint>
 
@@ -17,5 +16,3 @@ public:
 
     void bindTexture(Textures *textures);
 };
-
-#endif

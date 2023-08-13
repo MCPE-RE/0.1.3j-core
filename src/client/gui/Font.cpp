@@ -171,7 +171,3 @@ void Font::drawWordWrap(const std::string& text, int32_t x, int32_t y, int32_t m
         y += 8;
     }
 }
-
-Font::~Font() {
-	// TODO Auto-generated destructor stub
-}

@@ -1,5 +1,4 @@
-#ifndef MINECRAFT_H_
-#define MINECRAFT_H_
+#pragma once
 
 #include "App.h"
 #include "client/renderer/gles.h"
@@ -66,6 +65,7 @@ public:
     void *hitResult; // 3412
     void *unknown28; // 3444
     uint32_t unknown22; // 3452
+    std::string externalStoragePath; // 3456
 
     // TODO: class Timer
     void *timer; // 3480
@@ -73,15 +73,15 @@ public:
     uint8_t unknown5; // 3516
     uint32_t unknown27; // 3520
     uint32_t unknown14; // 3524
-    uint32_t unknown24; // 3528
     uint8_t powerVR; // 3525
+    uint32_t unknown24; // 3528
     uint32_t unknown4; // 3532
     uint32_t unknown9; // 3536
     uint32_t unknown18; // 3540
     uint8_t screenInUse; // 3544
     uint8_t hasScreenToBeSet; // 3545
     Screen *screenToBeSet; // 3548
-    uint32_t unknown25; // 3552
+    uint32_t licenseId; // 3552
     bool touchScreenEnabled; // 3556
 
     static bool useAmbientOcclusion;
@@ -112,5 +112,3 @@ public:
 
     void grabMouse();
 };
-
-#endif /* MINECRAFT_H_ */

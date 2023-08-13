@@ -1,5 +1,4 @@
-#ifndef MOUSE_H_
-#define MOUSE_H_
+#pragma once
 
 #include "MouseDevice.h"
 
@@ -29,5 +28,3 @@ public:
 
     static void reset2();
 };
-
-#endif

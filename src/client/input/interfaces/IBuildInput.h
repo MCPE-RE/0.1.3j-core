@@ -1,5 +1,4 @@
-#ifndef IBUILDINPUT_H_
-#define IBUILDINPUT_H_
+#pragma once
 
 #include <cstdint>
 
@@ -9,5 +8,3 @@ public:
 
     virtual int32_t tickBuild(void *player, void *buildActionIntention);
 };
-
-#endif

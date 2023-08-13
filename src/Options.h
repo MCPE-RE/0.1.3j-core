@@ -1,5 +1,4 @@
-#ifndef OPTIONS_H_
-#define OPTIONS_H_
+#pragma once
 
 #include <iostream>
 #include <cstdint>
@@ -118,5 +117,3 @@ public:
 
     void update(std::vector<std::string>& optionStrings);
 };
-
-#endif

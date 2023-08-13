@@ -1,5 +1,4 @@
-#ifndef ITOUCHSCREENMODEL_H_
-#define ITOUCHSCREENMODEL_H_
+#pragma once
 
 #include <cstdint>
 #include "../mouse/MouseAction.h"
@@ -10,5 +9,3 @@ public:
 
     virtual int32_t getPointerId(int32_t x, int32_t y, int32_t pointerId);
 };
-
-#endif

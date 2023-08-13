@@ -1,5 +1,4 @@
-#ifndef VEC3_H_
-#define VEC3_H_
+#pragma once
 
 #include <cstdint>
 
@@ -35,5 +34,3 @@ public:
 	
 	float length();
 };
-
-#endif

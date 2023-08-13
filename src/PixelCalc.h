@@ -1,5 +1,4 @@
-#ifndef PIXELCALC_H_
-#define PIXELCALC_H_
+#pragma once
 
 class PixelCalc {
 public:
@@ -14,5 +13,3 @@ public:
 
     void setPixelsPerMillimeter(float pixelsPerMillimeter);
 };
-
-#endif

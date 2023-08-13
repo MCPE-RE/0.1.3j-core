@@ -1,5 +1,4 @@
-#ifndef FONT_H_
-#define FONT_H_
+#pragma once
 
 #include <string>
 #ifdef USE_DESKTOP_GL
@@ -48,8 +47,4 @@ public:
     int32_t height(const std::string& text);
 
     void drawWordWrap(const std::string& text, int32_t x, int32_t y, int32_t maxLineWidth, int32_t colorHash);
-
-	virtual ~Font();
 };
-
-#endif /* FONT_H_ */

@@ -1,5 +1,4 @@
-#ifndef STARTMENUSCREEN_H_
-#define STARTMENUSCREEN_H_
+#pragma once
 
 #include <string>
 #include <algorithm>
@@ -41,5 +40,3 @@ public:
 
     void tick();
 };
-
-#endif /* STARTMENUSCREEN_H_ */

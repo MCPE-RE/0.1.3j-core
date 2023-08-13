@@ -1,5 +1,4 @@
-#ifndef RECTANGLEAREA_H_
-#define RECTANGLEAREA_H_
+#pragma once
 
 #include "interfaces/IArea.h"
 
@@ -18,5 +17,3 @@ public:
 
     void operator=(const RectangleArea &area);
 };
-
-#endif

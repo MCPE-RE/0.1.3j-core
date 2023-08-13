@@ -1,5 +1,4 @@
-#ifndef APPCONTEXT_H
-#define APPCONTEXT_H
+#pragma once
 
 #include "AppPlatform.h"
 
@@ -10,5 +9,3 @@ struct AppContext {
     AppPlatform *platform; // 0x2c0028
 	bool doRender; // 0x2c002c
 };
-
-#endif /* APPCONTEXT_H */

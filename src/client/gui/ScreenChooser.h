@@ -1,5 +1,4 @@
-#ifndef SCREENCHOOSER_H_
-#define SCREENCHOOSER_H_
+#pragma once
 
 class Minecraft;
 
@@ -21,5 +20,3 @@ public:
 private:
 	Minecraft *minecraft;
 };
-
-#endif /* SCREENCHOOSER_H_ */

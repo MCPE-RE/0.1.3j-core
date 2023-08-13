@@ -1,5 +1,4 @@
-#ifndef ENTITY_H_
-#define ENTITY_H_
+#pragma once
 
 #include "Level.h"
 
@@ -10,5 +9,3 @@ public:
 
 	Entity(Level *level);
 };
-
-#endif

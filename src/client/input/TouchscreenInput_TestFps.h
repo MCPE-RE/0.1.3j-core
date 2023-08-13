@@ -1,5 +1,4 @@
-#ifndef TOUCHSCREENINPUTTESTFPS_H_
-#define TOUCHSCREENINPUTTESTFPS_H_
+#pragma once
 
 #include "interfaces/IMoveInput.h"
 #include "../gui/GuiComponent.h"
@@ -42,5 +41,3 @@ public:
     
     void tick(void *player);
 };
-
-#endif

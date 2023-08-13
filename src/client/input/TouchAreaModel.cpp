@@ -20,7 +20,7 @@ void TouchAreaModel::clear() {
 }
 
 int32_t TouchAreaModel::getPointerId(const MouseAction *action) {
-    this->getPointerId(action->x, action->y, action->pointerId);
+    return this->getPointerId(action->x, action->y, action->pointerId);
 }
 
 int32_t TouchAreaModel::getPointerId(int32_t x, int32_t y, int32_t pointerId) {

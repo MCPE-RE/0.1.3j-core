@@ -1,5 +1,4 @@
-#ifndef ITURNINPUT_H_
-#define ITURNINPUT_H_
+#pragma once
 
 #include <cstdint>
 
@@ -17,5 +16,3 @@ public:
 
     virtual float getTurnDelta() = 0;
 };
-
-#endif

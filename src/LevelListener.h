@@ -1,5 +1,4 @@
-#ifndef LEVELLISTENER_H_
-#define LEVELLISTENER_H_
+#pragma once
 
 #include <string>
 
@@ -33,5 +32,3 @@ public:
 
 	void playStreamingMusic(const std::string& name, uint32_t unknown0, uint32_t unknown1, uint32_t unknown2);
 };
-
-#endif /* LEVELLISTENER_H_ */

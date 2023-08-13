@@ -1,5 +1,4 @@
-#ifndef STOPWATCH_H_
-#define STOPWATCH_H_
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -23,5 +22,3 @@ public:
 
     void start();
 };
-
-#endif

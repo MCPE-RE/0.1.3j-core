@@ -1,5 +1,4 @@
-#ifndef KEYBOARD_H_
-#define KEYBOARD_H_
+#pragma once
 
 #include "KeyboardAction.h"
 #include <cstdint>
@@ -23,5 +22,3 @@ public:
     
     static void reset();
 };
-
-#endif

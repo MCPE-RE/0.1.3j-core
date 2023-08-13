@@ -1,5 +1,4 @@
-#ifndef NINECRAFTAPP_H_
-#define NINECRAFTAPP_H_
+#pragma once
 
 #include <string>
 #ifdef USE_DESKTOP_GL
@@ -35,8 +34,4 @@ public:
     void update();
 
 	void onGraphicsReset();
-
-	virtual ~NinecraftApp();
 };
-
-#endif /* NINECRAFTAPP_H_ */

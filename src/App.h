@@ -1,5 +1,4 @@
-#ifndef APP_H_
-#define APP_H_
+#pragma once
 
 #include "AppContext.h"
 #include "AppPlatform.h"
@@ -52,5 +51,3 @@ public:
 	
 	void destroy();
 };
-
-#endif /* APP_H_ */

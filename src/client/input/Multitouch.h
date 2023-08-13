@@ -1,5 +1,4 @@
-#ifndef MULTITOUCH_H_
-#define MULTITOUCH_H_
+#pragma once
 
 #include <vector>
 #include <cstdint>
@@ -48,5 +47,3 @@ public:
 
     static void rewind();
 };
-
-#endif

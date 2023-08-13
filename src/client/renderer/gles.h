@@ -1,5 +1,4 @@
-#ifndef GLES_H_
-#define GLES_H_
+#pragma once
 
 #include <cstdint>
 #ifdef USE_DESKTOP_GL
@@ -12,5 +11,3 @@
 void anGenBuffers(uint32_t count, uint32_t *buffer);
 
 void checkGlError();  // Maybe has a string parameter like the java alpha
-
-#endif

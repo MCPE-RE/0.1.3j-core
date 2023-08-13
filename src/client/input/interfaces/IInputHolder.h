@@ -1,5 +1,4 @@
-#ifndef IINPUTHOLDER_H_
-#define IINPUTHOLDER_H_
+#pragma once
 
 #include <cstdint>
 #include "ITurnInput.h"
@@ -24,5 +23,3 @@ public:
 
     virtual IBuildInput *getBuildInput() = 0;
 };
-
-#endif

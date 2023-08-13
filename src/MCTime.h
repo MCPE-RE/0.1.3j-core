@@ -1,6 +1,3 @@
-#ifndef MCTIME_H_
-#define MCTIME_H_
+#pragma once
 
 float getTimeS(void);
-
-#endif

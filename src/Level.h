@@ -1,5 +1,4 @@
-#ifndef LEVEL_H_
-#define LEVEL_H_
+#pragma once
 
 #include "LevelListener.h"
 #include <vector>
@@ -15,5 +14,3 @@ public:
 
 	void removeListener(LevelListener *listener);
 };
-
-#endif /* LEVEL_H_ */

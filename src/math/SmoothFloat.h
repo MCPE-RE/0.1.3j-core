@@ -1,5 +1,4 @@
-#ifndef SMOOTHFLOAT_H_
-#define SMOOTHFLOAT_H_
+#pragma once
 
 class SmoothFloat {
 public:
@@ -11,5 +10,3 @@ public:
 
     float getNewDeltaValue(float change, float factor);
 };
-
-#endif

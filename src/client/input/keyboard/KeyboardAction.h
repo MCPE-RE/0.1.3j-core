@@ -1,5 +1,4 @@
-#ifndef KEYBOARDACTION_H_
-#define KEYBOARDACTION_H_
+#pragma once
 
 #include <cstdint>
 
@@ -10,5 +9,3 @@ public:
 
     KeyboardAction(uint8_t key, int32_t state);
 };
-
-#endif

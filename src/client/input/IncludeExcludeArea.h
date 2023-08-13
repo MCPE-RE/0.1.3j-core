@@ -1,5 +1,4 @@
-#ifndef INCLUDEEXCLUDEAREA_H_
-#define INCLUDEEXCLUDEAREA_H_
+#pragma once
 
 #include "interfaces/IArea.h"
 #include <vector>
@@ -17,5 +16,3 @@ public:
 
     bool isInside(float x, float y);
 };
-
-#endif

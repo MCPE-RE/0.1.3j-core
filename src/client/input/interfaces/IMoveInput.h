@@ -1,5 +1,4 @@
-#ifndef IMOVEINPUT_H_
-#define IMOVEINPUT_H_
+#pragma once
 
 #include <cstdint>
 
@@ -23,5 +22,3 @@ public:
 
     virtual void tick(void *player);
 };
-
-#endif

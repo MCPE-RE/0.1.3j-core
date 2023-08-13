@@ -1,5 +1,4 @@
-#ifndef SCREEN_H_
-#define SCREEN_H_
+#pragma once
 
 #include <vector>
 #ifdef USE_DESKTOP_GL
@@ -76,5 +75,3 @@ public:
 
 	void setSize(uint32_t width, uint32_t height);
 };
-
-#endif /* SCREEN_H_ */

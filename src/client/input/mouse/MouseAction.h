@@ -1,5 +1,4 @@
-#ifndef MOUSEACTION_H_
-#define MOUSEACTION_H_
+#pragma once
 
 #include <cstdint>
 
@@ -15,5 +14,3 @@ public:
 
     bool isButton();
 };
-
-#endif

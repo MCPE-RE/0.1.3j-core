@@ -1,5 +1,4 @@
-#ifndef RENDERCHUNK_H_
-#define RENDERCHUNK_H_
+#pragma once
 
 #include <cstdint>
 #include "../../math/Vec3.h"
@@ -16,5 +15,3 @@ public:
 	
 	RenderChunk(uint32_t bufferId, uint32_t addedVertices);
 };
-
-#endif

@@ -1,9 +1,6 @@
-#ifndef GUI_H_
-#define GUI_H_
+#pragma once
 
 class Gui {
 public:
     static float InvGuiScale;
 };
-
-#endif

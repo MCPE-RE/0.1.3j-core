@@ -82,7 +82,3 @@ void AppPlatform::uploadPlatformDependentData(int unknown0, void *unknown1) {}
 
 void AppPlatform::vibrate(int milliseconds) {}
 
-AppPlatform::~AppPlatform() {
-	// TODO Auto-generated destructor stub
-}
-

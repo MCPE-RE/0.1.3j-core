@@ -48,8 +48,3 @@ void NinecraftApp::update() {
     Multitouch::commit();
     Minecraft::update();
 }
-
-NinecraftApp::~NinecraftApp() {
-	// TODO Auto-generated destructor stub
-}
-

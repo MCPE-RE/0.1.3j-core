@@ -1,5 +1,4 @@
-#ifndef APPPLATFORM_H_
-#define APPPLATFORM_H_
+#pragma once
 
 #include <string>
 #include "client/renderer/TextureData.h"
@@ -58,8 +57,4 @@ public:
 	virtual void uploadPlatformDependentData(int unknown0, void *unknown1);
     
 	virtual void vibrate(int milliseconds);
-
-	virtual ~AppPlatform();
 };
-
-#endif /* APPPLATFORM_H_ */

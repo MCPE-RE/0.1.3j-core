@@ -1,5 +1,4 @@
-#ifndef GUICOMPONENT_H_
-#define GUICOMPONENT_H_
+#pragma once
 
 #include <cstdint>
 #include "Font.h"
@@ -19,8 +18,4 @@ public:
 	void drawCenteredString(Font *font, const std::string& text, int32_t x, int32_t y, int32_t colorHash);
 
     void drawString(Font *font, const std::string& text, int32_t x, int32_t y, int32_t colorHash);
-
-	virtual ~GuiComponent();
 };
-
-#endif /* GUICOMPONENT_H_ */

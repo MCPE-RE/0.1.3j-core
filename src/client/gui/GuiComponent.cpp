@@ -108,7 +108,3 @@ void GuiComponent::drawCenteredString(Font *font, const std::string& text, int32
 void GuiComponent::drawString(Font *font, const std::string& text, int32_t x, int32_t y, int32_t colorHash) {
     font->drawShadow(text, x, y, colorHash);
 }
-
-GuiComponent::~GuiComponent() {
-	// TODO Auto-generated destructor stub
-}

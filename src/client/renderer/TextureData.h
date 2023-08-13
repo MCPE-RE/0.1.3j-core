@@ -1,5 +1,4 @@
-#ifndef TEXTUREDATA_H_
-#define TEXTUREDATA_H_
+#pragma once
 
 #include <cstddef>
 #include <cstdint>
@@ -17,5 +16,3 @@ public:
 
     TextureData();
 };
-
-#endif

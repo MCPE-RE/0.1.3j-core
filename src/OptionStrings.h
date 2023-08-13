@@ -1,5 +1,4 @@
-#ifndef OPTIONSTRINGS_H_
-#define OPTIONSTRINGS_H_
+#pragma once
 
 class OptionStrings {
 public:
@@ -12,5 +11,3 @@ public:
     static const char *Controls_IsLefthanded;
     static const char *Controls_FeedbackVibration;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef MOUSEDEVICE_H_
-#define MOUSEDEVICE_H_
+#pragma once
 
 #include <cstdint>
 #include <vector>
@@ -39,5 +38,3 @@ public:
 
     void reset2();
 };
-
-#endif

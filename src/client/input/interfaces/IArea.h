@@ -1,5 +1,4 @@
-#ifndef IAREA_H_
-#define IAREA_H_
+#pragma once
 
 #include <cstdint>
 
@@ -15,5 +14,3 @@ public:
 
     void operator=(const IArea& area);
 };
-
-#endif

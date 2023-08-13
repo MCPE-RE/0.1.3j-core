@@ -1,5 +1,4 @@
-#ifndef TEXTURES_H_
-#define TEXTURES_H_
+#pragma once
 
 #include <cstdint>
 #include <map>
@@ -52,5 +51,3 @@ public:
 
 	void bind(GLuint textureId);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef OPTIONSSCREEN_H_
-#define OPTIONSSCREEN_H_
+#pragma once
 
 #include "../Screen.h"
 
@@ -15,5 +14,3 @@ public:
 
 	void render(uint32_t x, uint32_t y, float unknown2);
 };
-
-#endif /* OPTIONSSCREEN_H_ */

@@ -1,5 +1,4 @@
-#ifndef LICENSECODES_H_
-#define LICENSECODES_H_
+#pragma once
 
 #include <cstdint>
 
@@ -9,5 +8,3 @@ public:
 
     static bool isReady(int32_t code);
 };
-
-#endif /* LICENSECODES_H_ */

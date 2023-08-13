@@ -1,5 +1,4 @@
-#ifndef MOUSEHANDLER_H_
-#define MOUSEHANDLER_H_
+#pragma once
 
 #include <cstdint>
 #include "../interfaces/ITurnInput.h"
@@ -21,5 +20,3 @@ public:
 
     void setTurnInput(ITurnInput *turnInput);
 };
-
-#endif

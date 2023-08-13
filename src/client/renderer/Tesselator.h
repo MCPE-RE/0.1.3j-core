@@ -1,5 +1,4 @@
-#ifndef TESSELATOR_H_
-#define TESSELATOR_H_
+#pragma once
 
 #include <cstdint>
 #include <cstdio>
@@ -89,5 +88,3 @@ public:
 	
 	void voidBeginAndEndCalls(bool enabled);
 };
-
-#endif /* TESSELATOR_H_ */

@@ -1,5 +1,4 @@
-#ifndef LEVELRENDERER_H_
-#define LEVELRENDERER_H_
+#pragma once
 
 #include <stddef.h>
 #include <vector>
@@ -59,5 +58,3 @@ public:
 
     void setLevel(Level *level);
 };
-
-#endif

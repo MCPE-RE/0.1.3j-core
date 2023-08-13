@@ -1,5 +1,4 @@
-#ifndef KEYMAPPING_H_
-#define KEYMAPPING_H_
+#pragma once
 
 #include <iostream>
 #include <cstdint>
@@ -15,5 +14,3 @@ public:
 
     void operator=(const KeyMapping& mapping);
 };
-
-#endif

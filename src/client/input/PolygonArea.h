@@ -1,5 +1,4 @@
-#ifndef POLYGONAREA_H_
-#define POLYGONAREA_H_
+#pragma once
 
 #include "interfaces/IArea.h"
 
@@ -13,5 +12,3 @@ public:
 
     bool isInside(float x, float y);
 };
-
-#endif
