@@ -115,12 +115,12 @@ void Minecraft::setScreen(Screen *screen) {
             }
             this->screen = screen;
             if (screen) {
-                // this->releaseMouse();
+                this->releaseMouse();
 				uint32_t scaledWidth = (uint32_t)((float)this->width * Gui::InvGuiScale);
                 uint32_t scaledHeight = (uint32_t)((float)this->height * Gui::InvGuiScale);
                 screen->init(this, scaledWidth, scaledHeight);
             } else {
-                // this->grabMouse();
+                this->grabMouse();
             }
         }
 	}
@@ -166,8 +166,22 @@ bool Minecraft::isLevelGenerated() {
     return this->level != nullptr && this->unknown5 != 1;
 }
 
-Minecraft::~Minecraft() {
-	// TODO Auto-generated destructor stub
+void Minecraft::releaseMouse() {
+    if (this->isMouseGrabbed) {
+        if (this->localPlayer) {
+            // this->localPlayer->releaseAllKeys();
+        }
+        this->isMouseGrabbed = false;
+        this->mouseHandler.release();
+    }
+}
+
+void Minecraft::grabMouse() {
+    if (!this->isMouseGrabbed) {
+        this->isMouseGrabbed = true;
+        this->mouseHandler.grab();
+        this->setScreen(nullptr);
+    }
 }
 
 /* void checkGlErrors() {

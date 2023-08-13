@@ -16,7 +16,7 @@ class Minecraft : public App {
 public:
     using App::init;
 
-    uint8_t unknown0; // 28
+    uint8_t isLocatingMultiplayer; // 28
     uint32_t width; // 32
     uint32_t height; // 36
     Options options; // 40
@@ -44,8 +44,8 @@ public:
     // TODO: class User
     void *user; // 716
     Level *level; // 720
-    // TODO: class Entity
-    void *entity; // 724
+    // TODO: class LocalPlayer
+    void *localPlayer; // 724
     // TODO: class TouchInputHolder
     void *touchInputHolder; // 728
     uint32_t unknown15; // 732
@@ -56,7 +56,7 @@ public:
     void *thread; // 3368
     Screen *screen; // 3372
     // TODO: class MouseHandler
-    MouseHandler *mouseHandler; // 3376
+    MouseHandler mouseHandler; // 3376
     bool isMouseGrabbed; // 3392
     // TODO: class PixelCalc
     PixelCalc guiPixelCalc; // 3396
@@ -108,7 +108,9 @@ public:
 
     bool isLevelGenerated();
 
-	virtual ~Minecraft();
+    void releaseMouse();
+
+    void grabMouse();
 };
 
 #endif /* MINECRAFT_H_ */
