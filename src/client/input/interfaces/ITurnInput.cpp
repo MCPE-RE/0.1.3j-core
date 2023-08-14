@@ -16,15 +16,15 @@ float ITurnInput::getDeltaTime() {
     return deltaTime;
 }
 
-float ITurnInput::linearTransform(float x, float y, float z, bool dbas) {
-    if (x < 0.0) {
-        y *= -1;
+float ITurnInput::linearTransform(float input_value, float threshold, float scale, float normalize) {
+    if (input_value < 0.0) {
+        threshold *= -1;
     }
-    if (std::abs(y) >= std::abs(x)) {
+    if (std::abs(threshold) >= std::abs(input_value)) {
         return 0.0f;
     }
-    float result = (x - y) * z;
-    if (dbas && std::abs(result) > 1.0) {
+    float result = (input_value - threshold) * scale;
+    if (normalize && std::abs(result) > 1.0) {
         result /= std::abs(result);
     }
     return result;

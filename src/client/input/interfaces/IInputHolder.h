@@ -10,6 +10,7 @@ class IInputHolder {
 public:
     float x;
     float y;
+    float delta;
 
     IInputHolder();
 
