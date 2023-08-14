@@ -31,7 +31,7 @@ public:
     uint32_t unknown_188;
     float x; // 192
     float y; // 196
-    void *entity;
+    void *player; // 200
     float unknown_204;
     uint32_t unknown_208;
     uint8_t unknown_212;

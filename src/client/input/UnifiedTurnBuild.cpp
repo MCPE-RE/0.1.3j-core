@@ -16,7 +16,7 @@ UnifiedTurnBuild::UnifiedTurnBuild(int32_t xx, int32_t width, int32_t height, fl
     this->unknown_188 = 0;
     this->x = x;
     this->y = y;
-    this->entity = nullptr;
+    this->player = nullptr;
     this->unknown_216 = 0;
     this->includeExcludeArea.isDeletable = false;
     this->setScreenSize(width, height);
@@ -53,7 +53,7 @@ TurnDelta UnifiedTurnBuild::getTurnDelta() {
         this->time = time;
         this->unknown_188 = 0;
         this->unknown_216 = 1;
-        this->unknown_212 = !this->entity || (this->getSpeedSquared(this->entity) <= 0.01f);
+        this->unknown_212 = !this->player || (this->getSpeedSquared(this->player) <= 0.01f);
         this->unknown_36 = 0;
     } else if (this->hasPointerId && !hasPointerId) {
         this->unknown_36 = 0;
@@ -78,7 +78,7 @@ TurnDelta UnifiedTurnBuild::getTurnDelta() {
                 this->unknown_216 = 2;
             }
             if (this->unknown_216 == 1 && (time - this->time) >= 0.04f) {
-                if (this->unknown_188 > 20.0f || (this->entity && this->getSpeedSquared(this->entity) > 0.01f)) {
+                if (this->unknown_188 > 20.0f || (this->player && this->getSpeedSquared(this->player) > 0.01f)) {
                     this->unknown_216 = 2;
                 } else {
                     this->unknown_216 = 3;
@@ -135,4 +135,43 @@ void UnifiedTurnBuild::setScreenSize(int32_t width, int32_t height) {
     this->touchAreaModel.addArea(100, &this->includeExcludeArea);
 }
 
-bool UnifiedTurnBuild::tickBuild(void *player, void *buildActionIntention) {}
+bool UnifiedTurnBuild::tickBuild(void *player, void *buildActionIntention) {
+    if (this->unknown_216 == 3) {
+        if (!this->unknown_36) {
+            //*buildActionIntention = BuildActionIntention(10);
+            this->unknown_36 = 1;
+        } else {
+            //*buildActionIntention = BuildActionIntention(2);
+        }
+        return true;
+    } else {
+        bool result;
+        Multitouch::rewind();
+        float time = getTimeS();
+        this->unknown_16 = 0;
+        while (Multitouch::next()) {
+            MouseAction *action = Multitouch::getEvent();
+            if (action->button) {
+                int32_t pointerId = this->touchAreaModel.getPointerId(action);
+                if (pointerId == 100) {
+                    this->unknown_16 = 1;
+                    if (this->unknown_188 > 20.0f || action->buttonState || result) {
+                        if (action->buttonState == 1) {
+                            this->unknown_204 = time;
+                            this->unknown_208 = 0;
+                            this->unknown_216 = 1;
+                        }
+                    } else {
+                        float dt = time - this->unknown_204;
+                        if (this->unknown_216 <= 1 && dt >= 0.0f && dt < 0.25f) {
+                            //*buildActionIntention = BuildActionIntention(1);
+                            result = true;
+                        }
+                        this->unknown_216 = 0;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
