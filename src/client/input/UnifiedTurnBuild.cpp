@@ -28,7 +28,13 @@ UnifiedTurnBuild::UnifiedTurnBuild(int32_t xx, int32_t width, int32_t height, fl
 }
 
 float UnifiedTurnBuild::getSpeedSquared(void *entity) {
-    return 0.0f; // TODO
+    /*
+        float speedX = entity->x - entity->motionX; // entity+1 - entity+15
+        float speedY = entity->y - entity->motionY; // entity+2 - entity+16
+        float speedZ = entity->z - entity->motionZ; // entity+3 - entity+17
+        return (speedX * speedX) + (speedY * speedY) + (speedZ * speedZ);
+    */
+    return 0.0f;
 }
 
 TurnDelta UnifiedTurnBuild::getTurnDelta() {
