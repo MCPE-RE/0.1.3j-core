@@ -5,8 +5,8 @@
 
 class MouseHandler {
 public:
-    float turnDelta; // BYTE0
-    uint32_t unknown1; // BYTE4
+    float dx; // BYTE0
+    float dy; // BYTE4
     uint32_t unknown2; // BYTE8
     ITurnInput *turnInput; // BYTE12
 

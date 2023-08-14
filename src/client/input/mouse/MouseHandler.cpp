@@ -1,19 +1,21 @@
 #include "MouseHandler.h"
 #include <cstddef>
+#include "../TurnDelta.h"
 
 MouseHandler::MouseHandler() {
     this->turnInput = NULL;
 }
 
 void MouseHandler::grab() {
-    this->turnDelta = 0.0f;
-    this->unknown1 = 0;
+    this->dx = 0.0f;
+    this->dy = 0.0f;
 }
 
 void MouseHandler::poll() {
     if (this->turnInput) {
-        this->turnDelta = this->turnInput->getTurnDelta();
-        this->unknown1 = 0;
+        TurnDelta turnDelta = this->turnInput->getTurnDelta();
+        this->dx = turnDelta.dx;
+        this->dy = turnDelta.dy;
     }
 }
 
