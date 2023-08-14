@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 void IncludeExcludeArea::clear() {
-    if (this->unknown) {
+    if (this->isDeletable) {
         for (size_t i = 0; i < this->includeAreas.size(); ++i) {
             delete this->includeAreas[i];
         }

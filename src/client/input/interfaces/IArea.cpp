@@ -1,13 +1,13 @@
 #include "IArea.h"
 
 IArea::IArea() {
-    this->unknown = 1;
+    this->isDeletable = true;
 }
 
 IArea::IArea(const IArea& area) {
-    this->unknown = area.unknown;
+    this->isDeletable = area.isDeletable;
 }
 
 void IArea::operator=(const IArea& area) {
-    this->unknown = area.unknown;
+    this->isDeletable = area.isDeletable;
 }

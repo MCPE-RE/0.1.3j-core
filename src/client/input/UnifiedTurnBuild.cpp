@@ -12,13 +12,13 @@ UnifiedTurnBuild::UnifiedTurnBuild(int32_t xx, int32_t width, int32_t height, fl
     this->inputHolder = inputHolder;
     this->xx = 0.0f;
     this->yy = 0.0f;
-    this->unknown_128 = 0;
+    this->hasPointerId = false;
     this->unknown_188 = 0;
     this->x = x;
     this->y = y;
     this->entity = nullptr;
     this->unknown_216 = 0;
-    this->includeExcludeArea.unknown = 0;
+    this->includeExcludeArea.isDeletable = false;
     this->setScreenSize(width, height);
     this->time = getTimeS();
     this->unknown_204 = this->time;
@@ -49,18 +49,18 @@ TurnDelta UnifiedTurnBuild::getTurnDelta() {
             break;
         }
     }
-    if ( hasPointerId && !this->unknown_128) {
+    if ( hasPointerId && !this->hasPointerId) {
         this->time = time;
         this->unknown_188 = 0;
         this->unknown_216 = 1;
         this->unknown_212 = !this->entity || (this->getSpeedSquared(this->entity) <= 0.01f);
         this->unknown_36 = 0;
-    } else if (this->unknown_128 && !hasPointerId) {
+    } else if (this->hasPointerId && !hasPointerId) {
         this->unknown_36 = 0;
         this->unknown_216 = 0;
     }
-    if (this->unknown_12 == 2 && (this->unknown_128 || hasPointerId)) {
-        if (!this->unknown_128) {
+    if (this->unknown_12 == 2 && (this->hasPointerId || hasPointerId)) {
+        if (!this->hasPointerId) {
             this->xx = xx;
             this->yy = yy;
         }
@@ -111,7 +111,7 @@ TurnDelta UnifiedTurnBuild::getTurnDelta() {
     } else {
         this->inputHolder->delta = -0.05f;
     }
-    this->unknown_128 = hasPointerId;
+    this->hasPointerId = hasPointerId;
     return TurnDelta(dx, dy);
 }
 
@@ -119,6 +119,20 @@ bool UnifiedTurnBuild::isInsideArea(float x, float y) {
     return this->includeExcludeArea.isInside(x, y);
 }
 
-void UnifiedTurnBuild::setScreenSize(int32_t width, int32_t height) {}
+void UnifiedTurnBuild::setScreenSize(int32_t width, int32_t height) {
+    this->unknown_40 = RectangleArea(0.0f, 0.0f, width, height);
+    float dx = ((this->unknown_64.x2 - this->unknown_64.x1) * 0.05) + 10.0;
+    this->unknown_64.x1 -= dx;
+    this->unknown_64.x2 += dx;
+    float dy = ((this->unknown_64.y2 - this->unknown_64.y1) * 0.05) + 10.0;
+    this->unknown_64.y1 -= dy;
+    this->unknown_64.y2 += dy;
+    this->includeExcludeArea.clear();
+    this->includeExcludeArea.include(&this->unknown_40);
+    this->includeExcludeArea.exclude(&this->unknown_64);
+    this->includeExcludeArea.exclude(&this->unknown_88);
+    this->touchAreaModel.clear();
+    this->touchAreaModel.addArea(100, &this->includeExcludeArea);
+}
 
 bool UnifiedTurnBuild::tickBuild(void *player, void *buildActionIntention) {}

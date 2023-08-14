@@ -11,7 +11,7 @@ void TouchAreaModel::addArea(int32_t pointerId, IArea *area) {
 void TouchAreaModel::clear() {
     for (size_t i = 0; i < this->areas.size(); ++i) {
         TouchAreaModel::Area *area = this->areas[i];
-        if (area && area->area) {
+        if (area && area->area && area->area->isDeletable) {
             delete area->area;
         }
         delete area;

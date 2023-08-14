@@ -4,7 +4,7 @@
 
 class IArea {
 public:
-    uint8_t unknown;
+    bool isDeletable;
 
     IArea();
 

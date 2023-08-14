@@ -23,7 +23,7 @@ public:
     uint32_t unknown_116;
     uint32_t xx; // 120
     uint32_t yy; // 124
-    uint8_t unknown_128;
+    bool hasPointerId; // 128
     TouchAreaModel touchAreaModel; // 132
     IncludeExcludeArea includeExcludeArea; // 148
     uint32_t unknown_180;
