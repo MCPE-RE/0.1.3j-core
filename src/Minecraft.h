@@ -10,6 +10,7 @@
 #include "Level.h"
 #include "PixelCalc.h"
 #include "client/input/mouse/MouseHandler.h"
+#include "math/HitResult.h"
 
 class Minecraft : public App {
 public:
@@ -62,8 +63,7 @@ public:
     // TODO: class PixelCalc
     PixelCalc invGuiPixelCalc; // 3404
     // TODO: class HitResult
-    void *hitResult; // 3412
-    void *unknown28; // 3444
+    HitResult hitResult; // 3412
     uint32_t unknown22; // 3452
     std::string externalStoragePath; // 3456
 

@@ -8,6 +8,7 @@
 #include "TouchAreaModel.h"
 #include "IncludeExcludeArea.h"
 #include "TurnDelta.h"
+#include "../../entity/Entity.h"
 
 class UnifiedTurnBuild : public ITurnInput, public IBuildInput {
 public:
@@ -31,7 +32,7 @@ public:
     uint32_t unknown_188;
     float x; // 192
     float y; // 196
-    void *player; // 200
+    Entity *player; // 200
     float unknown_204;
     uint32_t unknown_208;
     uint8_t unknown_212;
@@ -39,7 +40,7 @@ public:
 
     UnifiedTurnBuild(int32_t xx, int32_t width, int32_t height, float x, float y, IInputHolder *inputHolder);
 
-    static float getSpeedSquared(void *entity);
+    static float getSpeedSquared(Entity *entity);
 
     TurnDelta getTurnDelta();
 
