@@ -3,6 +3,14 @@
 #include "../math/AABB.h"
 #include "../Level.h"
 
+enum EntityRenderType {
+    ENTITY_RENDER_NONE,
+    ENTITY_RENDER_TNT,
+    ENTITY_RENDER_HUMANOID,
+    ENTITY_RENDER_ITEM,
+    ENTITY_RENDER_CAMERA
+};
+
 class Entity {
 public:
     float posX; // 4
@@ -16,7 +24,7 @@ public:
     uint32_t unknown_36;
     uint32_t unknown_40;
     uint32_t entityId;
-    uint32_t unknown_48;
+    float renderDistanceWeight; // 48
     uint8_t unknown_52;
     Level *level; // 56
     float prevPosX; // 60
@@ -54,8 +62,8 @@ public:
     uint32_t unknown_188;
     uint32_t fire; // 192
     uint32_t unknown_196;
-    uint32_t unknown_200;
-    uint32_t fallDistance; // 204
+    EntityRenderType renderType; // 200
+    float fallDistance; // 204
     uint32_t unknown_208;
     bool inWater; // 212
     bool isImmuneToFire; // 213
