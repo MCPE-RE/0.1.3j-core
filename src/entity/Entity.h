@@ -45,8 +45,8 @@ public:
     uint32_t unknown_152;
     uint32_t unknown_156;
     uint32_t unknown_160;
-    uint32_t ySize; // 164
-    uint32_t stepHeight; // 168
+    float ySize; // 164
+    float stepHeight; // 168
     bool noClip; // 172
     uint32_t unknown_176;
     uint32_t ticksExisted;
