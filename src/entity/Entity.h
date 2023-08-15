@@ -57,8 +57,8 @@ public:
     uint32_t unknown_200;
     uint32_t unknown_204;
     uint32_t unknown_208;
-    uint8_t unknown_212;
+    bool inWater; // 212
     bool isImmuneToFire; // 213
-    uint8_t unknown_214;
+    bool firstUpdate; // 214
     uint32_t unknown_216;
 };
