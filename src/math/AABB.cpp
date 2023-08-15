@@ -9,7 +9,10 @@ AABB::AABB(float minX, float minY, float minZ, float maxX, float maxY, float max
     this->maxZ = maxZ;
 }
 
-void AABB::clip(const Vec3& vector1, const Vec3& vector2) {}
+HitResult AABB::clip(const Vec3& vector1, const Vec3& vector2) {
+    HitResult result;
+    return result;
+}
 
 void AABB::clipXCollide(const AABB& aabb, float x) {}
 

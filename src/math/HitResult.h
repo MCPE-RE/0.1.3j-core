@@ -2,7 +2,8 @@
 
 #include <cstdint>
 #include "Vec3.h"
-#include "../entity/Entity.h"
+
+class Entity;
 
 class HitResult {
 public:

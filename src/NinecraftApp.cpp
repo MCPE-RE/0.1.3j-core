@@ -1,6 +1,7 @@
 #include "NinecraftApp.h"
 #include "client/renderer/Tesselator.h"
 #include "client/input/Multitouch.h"
+#include "math/Mth.h"
 
 bool NinecraftApp::_hasInitedStatics = false;
 
@@ -39,6 +40,7 @@ bool NinecraftApp::handleBack(bool param) {
 }
 
 void NinecraftApp::init() {
+    Mth::initMth();
 	initGLStates();
 	Tesselator::instance.init();
 	Minecraft::init();

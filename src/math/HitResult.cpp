@@ -1,4 +1,5 @@
 #include "HitResult.h"
+#include "../entity/Entity.h"
 
 HitResult::HitResult(int32_t x, int32_t y, int32_t z, int32_t side, const Vec3& hitPos){
     this->type = 0;

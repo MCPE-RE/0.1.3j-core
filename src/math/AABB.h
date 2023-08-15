@@ -1,5 +1,6 @@
 #pragma once
 #include "Vec3.h"
+#include "HitResult.h"
 
 class AABB {
 public:
@@ -12,7 +13,7 @@ public:
 
     AABB(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
 
-    void clip(const Vec3& vector1, const Vec3& vector2);
+    HitResult clip(const Vec3& vector1, const Vec3& vector2);
 
     void clipXCollide(const AABB& aabb, float x);
 
