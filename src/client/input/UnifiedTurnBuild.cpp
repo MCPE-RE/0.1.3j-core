@@ -2,6 +2,7 @@
 #include "../../MCTime.h"
 #include "Multitouch.h"
 #include <iostream>
+#include "../../math/Mth.h"
 
 UnifiedTurnBuild::UnifiedTurnBuild(int32_t xx, int32_t width, int32_t height, float x, float y, IInputHolder *inputHolder) :
     unknown_40(-1.0, -1.0, 0.0, 0.0),
@@ -70,7 +71,7 @@ TurnDelta UnifiedTurnBuild::getTurnDelta() {
         if (hasPointerId) {
             dx = this->y * this->linearTransform(xx - this->xx, 0.0f, 1.0f, false);
             dy = this->y * this->linearTransform(yy - this->yy, 0.0f, 1.0f, false);
-            float delta = std::abs(dx) + std::abs(dy);
+            float delta = Mth::abs(dx) + Mth::abs(dy);
             if (this->x < delta) {
                 dx = 0.0f;
                 dy = 0.0f;

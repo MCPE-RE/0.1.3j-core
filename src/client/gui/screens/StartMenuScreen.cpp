@@ -1,6 +1,7 @@
 #include "StartMenuScreen.h"
 #include "OptionsScreen.h"
 #include "../../../Minecraft.h"
+#include "../../../math/Mth.h"
 #include "../../../LicenseCodes.h"
 
 StartMenuScreen::StartMenuScreen() :
@@ -35,7 +36,7 @@ void StartMenuScreen::render(uint32_t x, uint32_t y, float unknown2) {
 		this->minecraft->textures->bind(textureId);
         float halfWidth = (float)this->width / 2.0f;
         float halfTextureWidth = (float)data->width / 2.0f;
-        float minWidth = std::min(halfWidth, halfTextureWidth);
+        float minWidth = Mth::Min(halfWidth, halfTextureWidth);
         float yy = (float)data->height * ((minWidth * 2) / (float)data->width);
 
         glColor4f(1.0, 1.0, 1.0, 1.0);
