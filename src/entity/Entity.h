@@ -30,7 +30,7 @@ public:
     float prevRotationPitch; // 92
     float prevRotationYaw; // 96
     AABB boundingBox; // 100
-    uint8_t unknown_124;
+    bool onGround; // 124
     uint8_t unknown_125;
     uint8_t unknown_126;
     uint8_t unknown_127;
@@ -47,7 +47,7 @@ public:
     uint32_t unknown_160;
     uint32_t unknown_164;
     uint32_t unknown_168;
-    uint8_t unknown_172;
+    bool noClip; // 172
     uint32_t unknown_176;
     uint32_t ticksExisted;
     uint32_t unknown_184;
@@ -55,7 +55,7 @@ public:
     uint32_t fire; // 192
     uint32_t unknown_196;
     uint32_t unknown_200;
-    uint32_t unknown_204;
+    uint32_t fallDistance; // 204
     uint32_t unknown_208;
     bool inWater; // 212
     bool isImmuneToFire; // 213
