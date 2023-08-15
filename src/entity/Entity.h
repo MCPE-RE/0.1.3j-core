@@ -31,9 +31,9 @@ public:
     float prevRotationYaw; // 96
     AABB boundingBox; // 100
     bool onGround; // 124
-    uint8_t unknown_125;
-    uint8_t unknown_126;
-    uint8_t unknown_127;
+    bool isCollidedHorizontally; // 125
+    bool isCollidedVertically; // 126
+    bool isCollided; // 127
     bool isHurt; // 128
     uint8_t unknown_129;
     bool isDead; // 130
