@@ -6,8 +6,8 @@ static float MthSinTable[65536];
 static Random MthRandom;
 
 float Mth::PI = 3.1415927f;
-float Mth::RAD_TO_GRAD = 0.017453292f;
-float Mth::RADDEG = 57.295776f;
+float Mth::RAD_TO_GRAD =  Mth::PI / 180.0f;
+float Mth::RADDEG = 180.0f / Mth::PI;
 
 float Mth::Max(float a, float b) {
     return a < b ? b : a;
