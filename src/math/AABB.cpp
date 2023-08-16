@@ -10,11 +10,98 @@ AABB::AABB(float minX, float minY, float minZ, float maxX, float maxY, float max
 }
 
 HitResult AABB::clip(const Vec3& vector1, const Vec3& vector2) {
-    HitResult result;
-    return result;
+    Vec3 clipMinX;
+    Vec3 clipMinY;
+    Vec3 clipMinZ;
+    Vec3 clipMaxX;
+    Vec3 clipMaxY;
+    Vec3 clipMaxZ;
+    
+    bool hasClipMinX = vector1.clipX(vector2, this->minX, clipMinX);
+    bool hasClipMaxX = vector1.clipX(vector2, this->maxX, clipMaxX);
+    bool hasClipMinY = vector1.clipY(vector2, this->minY, clipMinY);
+    bool hasClipMaxY = vector1.clipY(vector2, this->maxY, clipMaxY);
+    bool hasClipMinZ = vector1.clipZ(vector2, this->minZ, clipMinZ);
+    bool hasClipMaxZ = vector1.clipZ(vector2, this->maxZ, clipMaxZ);
+
+    if (!hasClipMinX || !this->containsX(&clipMinX)) {
+        hasClipMinX = false;
+    }
+    if (!hasClipMinY || !this->containsX(&clipMinY)) {
+        hasClipMinY = false;
+    }
+    if (!hasClipMinY || !this->containsY(&clipMinY)) {
+        hasClipMinY = false;
+    }
+    if (!hasClipMinY || !this->containsY(&clipMinY)) {
+        hasClipMinY = false;
+    }
+    if (!hasClipMinZ || !this->containsZ(&clipMinZ)) {
+        hasClipMinZ = false;
+    }
+    if (!hasClipMinZ || !this->containsZ(&clipMinZ)) {
+        hasClipMinZ = false;
+    }
+
+    Vec3 *vector = nullptr;
+
+    if (hasClipMinX) {
+        if (!vector || vector1.distanceToSqr(clipMinX) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMinX;
+        }
+    }
+    if (hasClipMaxX) {
+        if (!vector || vector1.distanceToSqr(clipMaxX) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMaxX;
+        }
+    }
+    if (hasClipMinY) {
+        if (!vector || vector1.distanceToSqr(clipMinY) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMinY;
+        }
+    }
+    if (hasClipMaxY) {
+        if (!vector || vector1.distanceToSqr(clipMaxY) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMaxY;
+        }
+    }
+    if (hasClipMinZ) {
+        if (!vector || vector1.distanceToSqr(clipMinZ) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMinZ;
+        }
+    }
+    if (hasClipMaxZ) {
+        if (!vector || vector1.distanceToSqr(clipMaxZ) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMaxZ;
+        }
+    }
+
+    if (vector) {
+        int32_t side = -1;
+        if (vector == &clipMinX) {
+            side = 4;
+        }
+        if (vector == &clipMaxX) {
+            side = 5;
+        }
+        if (vector == &clipMinY) {
+            side = 0;
+        }
+        if (vector == &clipMaxY) {
+            side = 1;
+        }
+        if (vector == &clipMinZ) {
+            side = 2;
+        }
+        if (vector == &clipMaxZ) {
+            side = 3;
+        }
+        return HitResult(0, 0, 0, side, *vector);
+    }
+    return HitResult();
 }
 
-float AABB::clipXCollide(const AABB& aabb, float x) {
+float AABB::clipXCollide(const AABB& aabb, float x) const {
     if (aabb.maxY <= this->minY || aabb.minY >= this->maxY) {
         return x;
     }
@@ -30,7 +117,7 @@ float AABB::clipXCollide(const AABB& aabb, float x) {
     return x;
 }
 
-float AABB::clipYCollide(const AABB& aabb, float y) {
+float AABB::clipYCollide(const AABB& aabb, float y) const {
     if (aabb.maxX <= this->minX || aabb.minX >= this->maxX) {
         return y;
     }
@@ -46,7 +133,7 @@ float AABB::clipYCollide(const AABB& aabb, float y) {
     return y;
 }
 
-float AABB::clipZCollide(const AABB& aabb, float z) {
+float AABB::clipZCollide(const AABB& aabb, float z) const {
     if (aabb.maxX <= this->minX || aabb.minX >= this->maxX) {
         return z;
     }
@@ -62,7 +149,7 @@ float AABB::clipZCollide(const AABB& aabb, float z) {
     return z;
 }
 
-AABB AABB::cloneMove(float x, float y, float z) {
+AABB AABB::cloneMove(float x, float y, float z) const {
     return AABB::newTemp(
         this->minX + x,
         this->minY + y,
@@ -73,7 +160,7 @@ AABB AABB::cloneMove(float x, float y, float z) {
     );
 }
 
-bool AABB::contains(const Vec3& vector) {
+bool AABB::contains(const Vec3& vector) const {
     if (vector.x <= this->minX || vector.x >= this->maxX) {
         return false;
     }
@@ -123,14 +210,14 @@ AABB AABB::expand(float x, float y, float z) {
     );
 }
 
-float AABB::getSize() {
+float AABB::getSize() const {
     float dx = this->maxX - this->minX;
     float dy = this->maxY - this->minY;
     float dz = this->maxZ - this->minZ;
     return (dx + dy + dz) / 3.0f;
 }
 
-AABB AABB::grow(float x, float y, float z) {
+AABB AABB::grow(float x, float y, float z) const {
     return AABB(
         this->minX - x,
         this->minY - y,
@@ -141,7 +228,7 @@ AABB AABB::grow(float x, float y, float z) {
     );
 }
 
-bool AABB::intersects(const AABB& aabb) {
+bool AABB::intersects(const AABB& aabb) const {
     if (this->minX >= aabb.maxX || this->maxX <= aabb.minX) {
         return false;
     }
@@ -153,7 +240,7 @@ bool AABB::intersects(const AABB& aabb) {
     return false;
 }
 
-bool AABB::intersects(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+bool AABB::intersects(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) const {
     if (this->minX >= maxX || this->maxX <= minX) {
         return false;
     }

@@ -15,15 +15,15 @@ public:
 
     HitResult clip(const Vec3& vector1, const Vec3& vector2);
 
-    float clipXCollide(const AABB& aabb, float x);
+    float clipXCollide(const AABB& aabb, float x) const;
 
-    float clipYCollide(const AABB& aabb, float y);
+    float clipYCollide(const AABB& aabb, float y) const;
 
-    float clipZCollide(const AABB& aabb, float z);
+    float clipZCollide(const AABB& aabb, float z) const;
 
-    AABB cloneMove(float x, float y, float z);
+    AABB cloneMove(float x, float y, float z) const;
 
-    bool contains(const Vec3& vector);
+    bool contains(const Vec3& vector) const;
     
     bool containsX(Vec3 *vector);
 
@@ -33,13 +33,13 @@ public:
 
     AABB expand(float x, float y, float z);
 
-    float getSize();
+    float getSize() const;
 
-    AABB grow(float x, float y, float z);
+    AABB grow(float x, float y, float z) const;
 
-    bool intersects(const AABB& aabb);
+    bool intersects(const AABB& aabb) const;
 
-    bool intersects(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
+    bool intersects(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) const;
 
     void move(float x, float y, float z);
 

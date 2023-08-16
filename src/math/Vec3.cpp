@@ -19,7 +19,7 @@ void Vec3::set(float x, float y, float z) {
 	this->z = z;
 }
  
-Vec3 Vec3::normalize() {
+Vec3 Vec3::normalize() const {
 	float dot = sqrtf(this->x * this->x + this->y * this->y + this->z * this->z);
 	if (dot >= 0.0001) {
 		return Vec3(this->x / dot, this->y / dot, this->z / dot);
@@ -27,29 +27,29 @@ Vec3 Vec3::normalize() {
 	return Vec3();
 }
  
-Vec3 Vec3::add(float x, float y, float z) {
+Vec3 Vec3::add(float x, float y, float z) const {
 	return Vec3(this->x + x, this->y + y, this->z + z);
 }
 
-float Vec3::distanceTo(const Vec3& vec) {
+float Vec3::distanceTo(const Vec3& vec) const {
 	float diffX = vec.x - this->x;
 	float diffY = vec.y - this->y;
 	float diffZ = vec.z - this->z;
 	return sqrtf(diffX * diffX + diffY * diffY + diffZ * diffZ);
 }
 
-float Vec3::distanceToSqr(const Vec3& vec) {
+float Vec3::distanceToSqr(const Vec3& vec) const {
 	float diffX = vec.x - this->x;
 	float diffY = vec.y - this->y;
 	float diffZ = vec.z - this->z;
 	return diffX * diffX + diffY * diffY + diffZ * diffZ;
 }
 
-Vec3 Vec3::scale(float multiplier) {
+Vec3 Vec3::scale(float multiplier) const {
 	return Vec3(this->x * multiplier, this->y * multiplier, this->z * multiplier);
 }
 
-bool Vec3::clipX(const Vec3& vecSrc, float clipX, Vec3& vecDst) {
+bool Vec3::clipX(const Vec3& vecSrc, float clipX, Vec3& vecDst) const {
 	float diffX = vecSrc.x - this->x;
 	float diffY = vecSrc.y - this->y;
 	float diffZ = vecSrc.z - this->z;
@@ -70,7 +70,7 @@ bool Vec3::clipX(const Vec3& vecSrc, float clipX, Vec3& vecDst) {
 	return true;
 }
 
-bool Vec3::clipY(const Vec3& vecSrc, float clipY, Vec3& vecDst) {
+bool Vec3::clipY(const Vec3& vecSrc, float clipY, Vec3& vecDst) const {
 	float diffX = vecSrc.x - this->x;
 	float diffY = vecSrc.y - this->y;
 	float diffZ = vecSrc.z - this->z;
@@ -91,7 +91,7 @@ bool Vec3::clipY(const Vec3& vecSrc, float clipY, Vec3& vecDst) {
 	return true;
 }
 
-bool Vec3::clipZ(const Vec3& vecSrc, float clipZ, Vec3& vecDst) {
+bool Vec3::clipZ(const Vec3& vecSrc, float clipZ, Vec3& vecDst) const {
 	float diffX = vecSrc.x - this->x;
 	float diffY = vecSrc.y - this->y;
 	float diffZ = vecSrc.z - this->z;
@@ -116,6 +116,6 @@ Vec3 Vec3::newTemp(float x, float y, float z) {
 	return Vec3(x, y, z);
 }
 
-float Vec3::length() {
+float Vec3::length() const {
 	return sqrtf(this->x * this->x + this->y * this->y + this->z * this->z);
 }
