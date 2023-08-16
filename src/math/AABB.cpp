@@ -14,11 +14,53 @@ HitResult AABB::clip(const Vec3& vector1, const Vec3& vector2) {
     return result;
 }
 
-float AABB::clipXCollide(const AABB& aabb, float x) {}
+float AABB::clipXCollide(const AABB& aabb, float x) {
+    if (aabb.maxY <= this->minY || aabb.minY >= this->maxY) {
+        return x;
+    }
+    if (aabb.maxZ <= this->minZ || aabb.minZ >= this->maxZ) {
+        return x;
+    }
+    if (x > 0.0f && aabb.maxX <= this->minX && (this->minX - aabb.maxX) < x) {
+        x = this->minX - aabb.maxX;
+    }
+    if (x < 0.0f && aabb.minX >= this->maxX && (this->maxX - aabb.minX) > x) {
+        x = this->maxX - aabb.minX;
+    }
+    return x;
+}
 
-float AABB::clipYCollide(const AABB& aabb, float y) {}
+float AABB::clipYCollide(const AABB& aabb, float y) {
+    if (aabb.maxX <= this->minX || aabb.minX >= this->maxX) {
+        return y;
+    }
+    if (aabb.maxZ <= this->minZ || aabb.minZ >= this->maxZ) {
+        return y;
+    }
+    if (y > 0.0f && aabb.maxY <= this->minY && (this->minX - aabb.maxX) < y) {
+        y = this->minY - aabb.maxY;
+    }
+    if (y < 0.0f && aabb.minY >= this->maxY && (this->maxY - aabb.minY) > y) {
+        y = this->maxY - aabb.minY;
+    }
+    return y;
+}
 
-float AABB::clipZCollide(const AABB& aabb, float z) {}
+float AABB::clipZCollide(const AABB& aabb, float z) {
+    if (aabb.maxX <= this->minX || aabb.minX >= this->maxX) {
+        return z;
+    }
+    if (aabb.maxY <= this->minY || aabb.minY >= this->maxY) {
+        return z;
+    }
+    if (z > 0.0f && aabb.maxZ <= this->minZ && (this->minZ - aabb.maxZ) < z) {
+        z = this->minZ - aabb.maxZ;
+    }
+    if (z < 0.0f && aabb.minZ >= this->maxZ && (this->maxZ - aabb.minZ) > z) {
+        z = this->maxZ - aabb.minZ;
+    }
+    return z;
+}
 
 AABB AABB::cloneMove(float x, float y, float z) {
     return AABB::newTemp(
@@ -108,6 +150,7 @@ bool AABB::intersects(const AABB& aabb) {
             return true;
         }
     }
+    return false;
 }
 
 bool AABB::intersects(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
@@ -119,6 +162,7 @@ bool AABB::intersects(float minX, float minY, float minZ, float maxX, float maxY
             return true;
         }
     }
+    return false;
 }
 
 void AABB::move(float x, float y, float z) {
