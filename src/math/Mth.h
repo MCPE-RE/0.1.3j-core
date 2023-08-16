@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 
 class Mth {
@@ -47,7 +48,7 @@ public:
 
     static int lerp(int v0, int v1, float t);
 
-    static int random(int seed);
+    static int random(int max);
 
     static float random();
 

@@ -1,7 +1,9 @@
 #include "Mth.h"
 #include <cmath>
+#include "Random.h"
 
 static float MthSinTable[65536];
+static Random MthRandom;
 
 float Mth::PI = 3.1415927f;
 float Mth::RAD_TO_GRAD = 0.017453292f;
@@ -110,9 +112,13 @@ int Mth::lerp(int v0, int v1, float t) {
     return v0 + (int)(t * (float)(v1 - v0));
 }
 
-int Mth::random(int seed) {}
+int Mth::random(int max) {
+    return MthRandom.nextInt(max);
+}
 
-float Mth::random() {}
+float Mth::random() {
+    return MthRandom.nextFloat();
+}
 
 float Mth::sin(float x) {
     return MthSinTable[(int)(x * 10430.0f) & 0xFFFF];
