@@ -2,6 +2,7 @@
 #include "client/renderer/Tesselator.h"
 #include "client/input/Multitouch.h"
 #include "math/Mth.h"
+#include "materials/Material.h"
 
 bool NinecraftApp::_hasInitedStatics = false;
 
@@ -41,6 +42,10 @@ bool NinecraftApp::handleBack(bool param) {
 
 void NinecraftApp::init() {
     Mth::initMth();
+    if (!NinecraftApp::_hasInitedStatics) {
+        NinecraftApp::_hasInitedStatics = true;
+        Material::initMaterials();
+    }
 	initGLStates();
 	Tesselator::instance.init();
 	Minecraft::init();
