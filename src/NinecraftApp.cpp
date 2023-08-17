@@ -2,7 +2,7 @@
 #include "client/renderer/Tesselator.h"
 #include "client/input/Multitouch.h"
 #include "math/Mth.h"
-#include "materials/Material.h"
+#include "material/Material.h"
 
 bool NinecraftApp::_hasInitedStatics = false;
 
