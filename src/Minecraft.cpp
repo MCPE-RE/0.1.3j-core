@@ -30,6 +30,8 @@ void Minecraft::init() {
     this->width = this->platform()->getScreenWidth();
     this->height = this->platform()->getScreenHeight();
     this->setScreen(new StartMenuScreen());
+    this->hasScreenToBeSet = false;
+    this->level = nullptr;
     //this->screen.init(this, this->platform()->getScreenWidth(), this->platform()->getScreenHeight());
 
     // "Init complete"
@@ -64,13 +66,16 @@ void Minecraft::update() {
     glClearColor(1, 1, 1, 1);
 
     this->screenInUse = true;
-    this->screen->tick();
-    this->screen->render(0, 0, 0);
-    this->screen->updateEvents();
+    if (this->screen) {
+        this->screen->tick();
+        this->screen->render(0, 0, 0);
+        this->screen->updateEvents();
+    }
+    
     Keyboard::reset();
     Mouse::reset();
     this->screenInUse = false;
-    if (this->hasScreenToBeSet) {
+    if (this->hasScreenToBeSet && this->screenToBeSet) {
         this->hasScreenToBeSet = false;
         this->setScreen(this->screenToBeSet);
     }
