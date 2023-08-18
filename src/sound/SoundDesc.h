@@ -4,6 +4,7 @@
 #include <iostream>
 
 class SoundDesc {
+public:
     uint8_t *sampleData;
     int32_t sampleDataSize;
     int32_t channels;
