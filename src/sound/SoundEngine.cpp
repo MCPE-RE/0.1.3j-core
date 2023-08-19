@@ -3,33 +3,35 @@
 #include "SoundDesc.h"
 #include "../Minecraft.h"
 
-SoundDesc SA_cloth1;
-SoundDesc SA_cloth2;
-SoundDesc SA_cloth3;
-SoundDesc SA_cloth4;
-SoundDesc SA_grass1;
-SoundDesc SA_grass2;
-SoundDesc SA_grass3;
-SoundDesc SA_grass4;
-SoundDesc SA_gravel1;
-SoundDesc SA_gravel2;
-SoundDesc SA_gravel3;
-SoundDesc SA_gravel4;
-SoundDesc SA_sand1;
-SoundDesc SA_sand2;
-SoundDesc SA_sand3;
-SoundDesc SA_sand4;
-SoundDesc SA_stone1;
-SoundDesc SA_stone2;
-SoundDesc SA_stone3;
-SoundDesc SA_stone4;
-SoundDesc SA_wood1;
-SoundDesc SA_wood2;
-SoundDesc SA_wood3;
-SoundDesc SA_wood4;
-SoundDesc SA_splash;
-SoundDesc SA_explode;
-SoundDesc SA_click;
+/*
+SoundDesc SA_cloth1 = SoundDesc(PCM_cloth1);
+SoundDesc SA_cloth2 = SoundDesc(PCM_cloth2);
+SoundDesc SA_cloth3 = SoundDesc(PCM_cloth3);
+SoundDesc SA_cloth4 = SoundDesc(PCM_cloth4);
+SoundDesc SA_grass1 = SoundDesc(PCM_grass1);
+SoundDesc SA_grass2 = SoundDesc(PCM_grass2);
+SoundDesc SA_grass3 = SoundDesc(PCM_grass3);
+SoundDesc SA_grass4 = SoundDesc(PCM_grass4);
+SoundDesc SA_gravel1 = SoundDesc(PCM_gravel1);
+SoundDesc SA_gravel2 = SoundDesc(PCM_gravel2);
+SoundDesc SA_gravel3 = SoundDesc(PCM_gravel3);
+SoundDesc SA_gravel4 = SoundDesc(PCM_gravel4);
+SoundDesc SA_sand1 = SoundDesc(PCM_sand1);
+SoundDesc SA_sand2 = SoundDesc(PCM_sand2);
+SoundDesc SA_sand3 = SoundDesc(PCM_sand3);
+SoundDesc SA_sand4 = SoundDesc(PCM_sand4);
+SoundDesc SA_stone1 = SoundDesc(PCM_stone1);
+SoundDesc SA_stone2 = SoundDesc(PCM_stone2);
+SoundDesc SA_stone3 = SoundDesc(PCM_stone3);
+SoundDesc SA_stone4 = SoundDesc(PCM_stone4);
+SoundDesc SA_wood1 = SoundDesc(PCM_wood1);
+SoundDesc SA_wood2 = SoundDesc(PCM_wood2);
+SoundDesc SA_wood3 = SoundDesc(PCM_wood3);
+SoundDesc SA_wood4 = SoundDesc(PCM_wood4);
+SoundDesc SA_splash = SoundDesc(PCM_splash);
+SoundDesc SA_explode = SoundDesc(PCM_explode);
+SoundDesc SA_click = SoundDesc(PCM_click);
+*/
 
 SoundEngine::SoundEngine(float volumeStepCount) {
     this->unknown_4 = 0;
@@ -57,6 +59,7 @@ void SoundEngine::init(Minecraft *minecraft, Options *options) {
     if (!options || options->soundVolume != 0.0f || options->musicVolume != 0.0f) {
         this->loadLibrary();
     }
+    /*
     this->repository.add("step.cloth", SA_cloth1);
     this->repository.add("step.cloth", SA_cloth2);
     this->repository.add("step.cloth", SA_cloth3);
@@ -84,6 +87,7 @@ void SoundEngine::init(Minecraft *minecraft, Options *options) {
     this->repository.add("random.splash", SA_splash);
     this->repository.add("random.explode", SA_explode);
     this->repository.add("random.click", SA_click);
+    */
 }
 
 void SoundEngine::loadLibrary() {}
