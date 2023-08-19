@@ -15,6 +15,8 @@ Minecraft::Minecraft() :
 	// First field may be "joiningNetwork"
 
 	// Field after screen chooser is *Font
+    this->soundEngine = new SoundEngine(20.0f);
+    this->soundEngine->init(this, &this->options);
 }
 
 void Minecraft::init() {

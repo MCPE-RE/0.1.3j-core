@@ -11,6 +11,7 @@
 #include "PixelCalc.h"
 #include "client/input/mouse/MouseHandler.h"
 #include "math/HitResult.h"
+#include "sound/SoundEngine.h"
 
 class Minecraft : public App {
 public:
@@ -29,7 +30,7 @@ public:
     void *gameRenderer; // 668
     void *particleEngine; // 672
     // TODO: class SoundEngine
-    void *soundEngine; // 676
+    SoundEngine *soundEngine; // 676
     // TODO: class SurvivalMode
     void *survivalMode;  // 680
     Textures *textures; // 684
