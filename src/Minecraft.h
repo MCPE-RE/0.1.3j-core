@@ -21,11 +21,7 @@ public:
     uint32_t width; // 32
     uint32_t height; // 36
     Options options; // 40
-
-    uint8_t unknown17; // 65
-
     uint8_t unknown7; // 660
-    void *unknown26; // 604
     LevelRenderer *levelRenderer; // 664
     void *gameRenderer; // 668
     void *particleEngine; // 672
