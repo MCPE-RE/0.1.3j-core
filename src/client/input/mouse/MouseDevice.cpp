@@ -38,7 +38,7 @@ uint8_t MouseDevice::getEventButton() {
 }
 
 bool MouseDevice::getEventButtonState() {
-    return this->events[this->eventIndex].buttonState != 1;
+    return this->events[this->eventIndex].buttonState == 1;
 }
 
 uint16_t MouseDevice::getX() {
