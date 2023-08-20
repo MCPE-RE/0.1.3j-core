@@ -8,7 +8,7 @@ Random::Random(int32_t seed) {
 }
 
 Random::Random() {
-    this->setSeed(getTimeS());
+    this->setSeed(getTimeMs());
 }
 
 int32_t Random::genrand_int32() {

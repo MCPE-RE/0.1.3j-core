@@ -22,3 +22,7 @@ float getTimeS(void) {
     return ((float)((*(uint64_t *)&current_timestamp) - 116444736000000000) / 10000000.0f) - mcEpoch;
     #endif
 }
+
+int32_t getTimeMs() {
+  return (int32_t)(getTimeS() * 1000.0f);
+}
