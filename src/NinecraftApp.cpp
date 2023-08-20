@@ -1,6 +1,7 @@
 #include "NinecraftApp.h"
 #include "client/renderer/Tesselator.h"
 #include "client/input/Multitouch.h"
+#include "client/input/mouse/Mouse.h"
 #include "math/Mth.h"
 #include "material/Material.h"
 
@@ -54,4 +55,5 @@ void NinecraftApp::init() {
 void NinecraftApp::update() {
     Multitouch::commit();
     Minecraft::update();
+    Mouse::reset2();
 }

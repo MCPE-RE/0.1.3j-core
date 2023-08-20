@@ -69,13 +69,12 @@ void Minecraft::update() {
 
     this->screenInUse = true;
     if (this->screen) {
+        this->screen->updateEvents();
         this->screen->tick();
         this->screen->render(0, 0, 0);
-        this->screen->updateEvents();
     }
     
     Keyboard::reset();
-    Mouse::reset();
     this->screenInUse = false;
     if (this->hasScreenToBeSet && this->screenToBeSet) {
         this->hasScreenToBeSet = false;
