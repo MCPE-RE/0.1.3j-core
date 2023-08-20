@@ -134,7 +134,7 @@ void Screen::keyPressed(uint32_t key) {
         if (this->minecraft->options.keyMenuOk.keyCode == key) {
             Button *btn = this->tabButtonList[this->buttonIndex];
             if (btn->isUsable) {
-                //this->minecraft->soundEngine->playUI("random.click", 1.0, 1.0);
+                this->minecraft->soundEngine->playUI("random.click", 1.0, 1.0);
                 this->buttonClicked(btn);
             }
         }
@@ -173,7 +173,7 @@ void Screen::mouseReleased(uint32_t x, uint32_t y, uint32_t button) {
             Button *btn = this->buttonList[i];
             if (btn == this->pressedButton && btn->clicked(this->minecraft, x, y)) {
                 this->buttonClicked(btn);
-                //this->minecraft->soundEngine->playUI("random.click", 1.0, 1.0);
+                this->minecraft->soundEngine->playUI("random.click", 1.0, 1.0);
                 this->pressedButton->released(x, y);
             }
         }
