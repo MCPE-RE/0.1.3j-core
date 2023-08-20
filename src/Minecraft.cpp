@@ -9,7 +9,8 @@
 Minecraft::Minecraft() :
     screenChooser(this),
     guiPixelCalc(1.0f),
-    invGuiPixelCalc(1.0f) {
+    invGuiPixelCalc(1.0f),
+    timer(20.0f) {
     this->screen = NULL;
     this->screenInUse = 0;
 	// First field may be "joiningNetwork"

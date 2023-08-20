@@ -12,6 +12,7 @@
 #include "client/input/mouse/MouseHandler.h"
 #include "math/HitResult.h"
 #include "sound/SoundEngine.h"
+#include "Timer.h"
 
 class Minecraft : public App {
 public:
@@ -25,7 +26,6 @@ public:
     LevelRenderer *levelRenderer; // 664
     void *gameRenderer; // 668
     void *particleEngine; // 672
-    // TODO: class SoundEngine
     SoundEngine *soundEngine; // 676
     // TODO: class SurvivalMode
     void *survivalMode;  // 680
@@ -52,21 +52,14 @@ public:
     // TODO: class CThread
     void *thread; // 3368
     Screen *screen; // 3372
-    // TODO: class MouseHandler
     MouseHandler mouseHandler; // 3376
     bool isMouseGrabbed; // 3392
-    // TODO: class PixelCalc
     PixelCalc guiPixelCalc; // 3396
-    // TODO: class PixelCalc
     PixelCalc invGuiPixelCalc; // 3404
-    // TODO: class HitResult
     HitResult hitResult; // 3412
     uint32_t unknown22; // 3452
     std::string externalStoragePath; // 3456
-
-    // TODO: class Timer
-    void *timer; // 3480
-    float unknown19; // 3496
+    Timer timer; // 3480
     uint8_t unknown5; // 3516
     uint32_t unknown27; // 3520
     uint32_t unknown14; // 3524
