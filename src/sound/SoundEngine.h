@@ -10,8 +10,9 @@
 
 class Minecraft;
 
-class SoundEngine : public SoundSystem {
+class SoundEngine {
 public:
+    SoundSystem soundSystem;
     Options *options;
     uint32_t unknown_4;
     Random random;

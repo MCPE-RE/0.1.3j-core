@@ -113,7 +113,7 @@ void SoundEngine::update(Entity *mob, float angle) {
             this->posY = mob->prevPosY + ((mob->posY - mob->prevPosY) * angle);
             this->posZ = mob->prevPosZ + ((mob->posZ - mob->prevPosZ) * angle);
             this->rotationPitch = mob->prevRotationPitch + ((mob->rotationPitch - mob->prevRotationPitch) * angle);
-            this->setListenerAngle(angle);
+            this->soundSystem.setListenerAngle(angle);
         }
     }
 }
