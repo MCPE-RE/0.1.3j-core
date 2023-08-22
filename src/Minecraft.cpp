@@ -5,6 +5,7 @@
 #include "client/input/keyboard/Keyboard.h"
 #include "client/input/mouse/Mouse.h"
 #include "client/input/Multitouch.h"
+#include "LicenseCodes.h"
 
 Minecraft::Minecraft() :
     screenChooser(this),
@@ -16,6 +17,7 @@ Minecraft::Minecraft() :
 	// First field may be "joiningNetwork"
 
 	// Field after screen chooser is *Font
+    this->licenseId = -2;
     this->soundEngine = new SoundEngine(20.0f);
     this->soundEngine->init(this, &this->options);
 }
@@ -189,6 +191,13 @@ void Minecraft::grabMouse() {
         this->mouseHandler.grab();
         this->setScreen(nullptr);
     }
+}
+
+int32_t Minecraft::getLicenseId() {
+    if (!LicenseCodes::isReady(this->licenseId)) {
+        this->licenseId = this->platform()->checkLicense();
+    }
+    return this->licenseId;
 }
 
 /* void checkGlErrors() {

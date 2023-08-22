@@ -101,4 +101,6 @@ public:
     void releaseMouse();
 
     void grabMouse();
+
+    int32_t getLicenseId();
 };

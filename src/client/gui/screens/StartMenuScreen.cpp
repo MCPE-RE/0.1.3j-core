@@ -86,8 +86,7 @@ bool StartMenuScreen::isInGameScreen() {
 }
 
 void StartMenuScreen::_updateLicense() {
-    //int32_t licenseId = this->minecraft->getLicenseId();
-    int32_t licenseId = 0;
+    int32_t licenseId = this->minecraft->getLicenseId();
     if (LicenseCodes::isReady(licenseId)) {
         if (LicenseCodes::isOk(licenseId)) {
             this->optionsButton.isUsable = true;
