@@ -23,6 +23,8 @@ public:
 
     Button(int32_t buttonId, int32_t x, int32_t y, const std::string& name);
 
+    Button(int32_t buttonId, const std::string& name);
+
     bool clicked(Minecraft *mc, int32_t x, int32_t y);
 
     int32_t getYImage(bool isHovered);

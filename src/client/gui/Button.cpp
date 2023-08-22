@@ -27,6 +27,19 @@ Button::Button(int32_t buttonId, int32_t x, int32_t y, const std::string& name) 
     this->isPressed = false;
 }
 
+Button::Button(int32_t buttonId, const std::string& name) {
+    this->width = 200;
+    this->height = 24;
+    this->x = 0;
+    this->y = 0;
+    this->name = name;
+    this->buttonId = buttonId;
+    this->isUsable = true;
+    this->doRender = true;
+    this->isHovered = false;
+    this->isPressed = false;
+}
+
 bool Button::clicked(Minecraft *mc, int32_t x, int32_t y) {
     if (
         !this->isUsable ||

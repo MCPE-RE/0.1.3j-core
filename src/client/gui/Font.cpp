@@ -114,19 +114,23 @@ std::string Font::sanitize(const std::string& text) {
 }
 
 int32_t Font::width(const std::string& text) {
-    int32_t temp = 0;
-    int32_t size = 0;
+    int32_t currentWidth = 0;
+    int32_t maxWidth = 0;
+    
     for (int32_t i = 0; i < text.length(); ++i) {
         uint8_t c = text[i];
         if (c == 167) {
             ++i;
         } else if (c == '\n') {
-            size = std::max(size, temp);
+            if (currentWidth > maxWidth) {
+                maxWidth = currentWidth;
+            }
+            currentWidth = 0;
         } else {
-            size += this->charWidthsInt[c];
+            currentWidth += this->charWidthsInt[c];
         }
     }
-    return std::max(size, temp);
+    return maxWidth <= currentWidth ? currentWidth : maxWidth;
 }
 
 int32_t Font::height(const std::string& text) {

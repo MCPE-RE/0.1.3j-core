@@ -92,7 +92,7 @@ void Minecraft::tickInput() {
 }
 
 bool Minecraft::isTouchScreen() {
-	return false; //this->touchScreenEnabled;
+	return this->touchScreenEnabled;
 }
 
 void Minecraft::reloadOptions() {

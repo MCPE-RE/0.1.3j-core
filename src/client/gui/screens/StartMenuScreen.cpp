@@ -1,5 +1,6 @@
 #include "StartMenuScreen.h"
 #include "OptionsScreen.h"
+#include "InvalidLicenseScreen.h"
 #include "../../../Minecraft.h"
 #include "../../../math/Mth.h"
 #include "../../../LicenseCodes.h"
@@ -94,7 +95,7 @@ void StartMenuScreen::_updateLicense() {
             this->joinGameButton.isUsable = true;
         } else {
             bool hasBuyButton = this->minecraft->platform()->hasBuyButtonWhenInvalidLicense();
-            //this->minecraft->setScreen(new InvalidLicenseScreen(licenseId, hasBuyButton));
+            this->minecraft->setScreen(new InvalidLicenseScreen(licenseId, hasBuyButton));
         }
     } else {
         this->optionsButton.isUsable = false;
