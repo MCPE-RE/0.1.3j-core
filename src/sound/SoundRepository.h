@@ -7,7 +7,7 @@
 
 class SoundRepository {
 public:
-    std::map<std::string, std::vector<SoundDesc>> repository;
+    std::map<std::string, std::vector<SoundDesc> > repository;
 
     void add(const std::string &name, SoundDesc &desc);
 };
