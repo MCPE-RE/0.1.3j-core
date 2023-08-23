@@ -25,16 +25,16 @@ public:
 
     Button(int32_t buttonId, const std::string& name);
 
-    bool clicked(Minecraft *mc, int32_t x, int32_t y);
+    virtual bool clicked(Minecraft *mc, int32_t x, int32_t y);
 
-    int32_t getYImage(bool isHovered);
+    virtual int32_t getYImage(bool isHovered);
 
-    void released(int32_t x, int32_t y);
+    virtual void released(int32_t x, int32_t y);
 
-    void render(Minecraft *mc, int32_t x, int32_t y);
+    virtual void render(Minecraft *mc, int32_t x, int32_t y);
 
-    void renderBg(Minecraft *mc, int32_t x, int32_t y);
+    virtual void renderBg(Minecraft *mc, int32_t x, int32_t y);
 
-    void setPressed();
+    virtual void setPressed();
     
 };

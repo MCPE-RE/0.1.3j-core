@@ -1,7 +1,7 @@
 #include "InvalidLicenseScreen.h"
 #include "../../../Minecraft.h"
 #include "../../../LicenseCodes.h"
-#include "../touch/TButton.h"
+#include "../TButton.h"
 
 InvalidLicenseScreen::InvalidLicenseScreen(int32_t licenseId, bool hasBuyButton) {
     this->licenseId = licenseId;
@@ -22,7 +22,7 @@ void InvalidLicenseScreen::buttonClicked(Button *button) {
 void InvalidLicenseScreen::init() {
     if (this->minecraft->isTouchScreen()) {
         this->okOrQuitButton = new Touch::TButton(1, "Ok");
-        this->buyButton = new Touch::TButton(2, "Quit");
+        this->buyButton = new Touch::TButton(2, "Buy");
     } else {
         this->okOrQuitButton = new Button(1, "Ok");
         this->buyButton = new Button(2, "Buy");

@@ -5,7 +5,7 @@
 
 class ImageButton : public Button {
 public:
-    ImageDef imageDef;
+    ImageDef imageDef; // 56
 
     ImageButton(int32_t buttonId, const std::string& name);
 

@@ -1,20 +1,17 @@
-#include "ImageButton.h"
+#include "LargeImageButton.h"
+#include "../../math/Mth.h"
 #include "../../Minecraft.h"
 
-ImageButton::ImageButton(int32_t buttonId, const std::string& name) : Button(buttonId, name) {
+LargeImageButton::LargeImageButton(int32_t buttonId, const std::string& name) : ImageButton(buttonId, name) {
     this->setupDefault();
 }
 
-ImageButton::ImageButton(int32_t buttonId, const std::string& name, ImageDef& imageDef) : Button(buttonId, name) {
+LargeImageButton::LargeImageButton(int32_t buttonId, const std::string&, ImageDef& imageDef) : ImageButton(buttonId, name) {
     this->imageDef = imageDef;
     this->setupDefault();
 }
 
-bool ImageButton::isSecondImage(bool second) {
-    return second;
-}
-
-void ImageButton::render(Minecraft *mc, int32_t x, int32_t y) {
+void LargeImageButton::render(Minecraft *mc, int32_t x, int32_t y) {
     if (this->doRender) {
         glColor4f(1.0, 1.0, 1.0, 1.0);
         bool second =
@@ -24,7 +21,6 @@ void ImageButton::render(Minecraft *mc, int32_t x, int32_t y) {
             this->y <= y &&
             this->x + this->width > x &&
             this->y + this->height > y;
-        bool isSecond = this->isSecondImage(second);
         this->renderBg(mc, x, y);
         GLuint textureId = -1;
         if (this->imageDef.name.length()) {
@@ -42,14 +38,17 @@ void ImageButton::render(Minecraft *mc, int32_t x, int32_t y) {
             float imageX = this->x + (float)this->imageDef.x + halfImageWidth;
             float imageY = this->y + (float)this->imageDef.y + halfImageHeight;
             if (second) {
-                halfImageWidth *= 0.95;
-                halfImageHeight *= 0.95;
+                this->smoothFactor = Mth::Max(0.95f, this->smoothFactor - 0.025f);
+            } else {
+                this->smoothFactor = Mth::Min(1.0f, this->smoothFactor + 0.025f);
             }
+            halfImageWidth *= this->smoothFactor;
+            halfImageHeight *= this->smoothFactor;
             if (this->imageDef.doRender) {
                 TextureData *data = mc->textures->getTemporaryTextureData(textureId);
                 if (data) {
-                    float minU = (float)(this->imageDef.rect.minX + (isSecond ? this->imageDef.rect.maxX : 0)) / (float)data->width;
-                    float maxU = (float)(this->imageDef.rect.minX + (isSecond ? 2 * this->imageDef.rect.maxX : this->imageDef.rect.maxX)) / (float)data->width;
+                    float minU = (float)(this->imageDef.rect.minX + (second ? this->imageDef.rect.maxX : 0)) / (float)data->width;
+                    float maxU = (float)(this->imageDef.rect.minX + (second ? 2 * this->imageDef.rect.maxX : this->imageDef.rect.maxX)) / (float)data->width;
                     float minV = (float)this->imageDef.rect.minY / (float)data->height;
                     float maxV = (float)(this->imageDef.rect.minY + this->imageDef.rect.maxY) / (float)data->height;
                     Tesselator::instance.vertexUV(imageX - halfImageWidth, imageY - halfImageHeight, this->zCoord, minU, minV);
@@ -66,26 +65,17 @@ void ImageButton::render(Minecraft *mc, int32_t x, int32_t y) {
             Tesselator::instance.draw();
         }
         if (!this->isUsable) {
-            this->drawCenteredString(mc->font, this->name, this->x + this->width / 2, this->y + 16, 0xffa0a0a0);
+            this->drawCenteredString(mc->font, this->name, this->x + this->width / 2, this->y + 11, 0xffa0a0a0);
         } else if (second || this->isHovered) {
-            this->drawCenteredString(mc->font, this->name, this->x + this->width / 2, this->y + 17, 0xffffa0);
+            this->drawCenteredString(mc->font, this->name, this->x + this->width / 2, this->y + 11, 0xffffa0);
         } else {
-            this->drawCenteredString(mc->font, this->name, this->x + this->width / 2, this->y + 16, 0xe0e0e0);
+            this->drawCenteredString(mc->font, this->name, this->x + this->width / 2, this->y + 11, 0xe0e0e0);
         }
     }
 }
 
-void ImageButton::renderBg(Minecraft *mc, int32_t x, int32_t y) {}
-
-void ImageButton::setImageDef(ImageDef& imageDef, bool setResolution) {
-    this->imageDef = imageDef;
-    if (setResolution) {
-        this->width = (int32_t)imageDef.width;
-        this->height = (int32_t)imageDef.height;
-    }
-}
-
-void ImageButton::setupDefault(void) {
+void LargeImageButton::setupDefault() {
+    this->smoothFactor = 1.0;
     this->width = 80;
     this->height = 90;
 }

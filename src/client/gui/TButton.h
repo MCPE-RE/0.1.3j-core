@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Button.h"
+#include "Button.h"
 
 namespace Touch {
     class TButton : public Button {
@@ -10,5 +10,7 @@ namespace Touch {
         TButton(int32_t buttonId, int32_t x, int32_t y, const std::string& name);
 
         TButton(int32_t buttonId, const std::string& name);
+
+        void renderBg(Minecraft *mc, int32_t x, int32_t y);
     };
 }

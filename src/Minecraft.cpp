@@ -34,10 +34,8 @@ void Minecraft::init() {
     this->font = new Font(&this->options, "font/default.png", this->textures);
     this->width = this->platform()->getScreenWidth();
     this->height = this->platform()->getScreenHeight();
-    this->setScreen(new StartMenuScreen());
     this->hasScreenToBeSet = false;
     this->level = nullptr;
-    //this->screen.init(this, this->platform()->getScreenWidth(), this->platform()->getScreenHeight());
 
     // "Init complete"
 }
@@ -74,7 +72,7 @@ void Minecraft::update() {
     if (this->screen) {
         this->screen->updateEvents();
         this->screen->tick();
-        this->screen->render(0, 0, 0);
+        this->screen->render(Mouse::getX() * Gui::InvGuiScale, Mouse::getY() * Gui::InvGuiScale, 0);
     }
     
     Keyboard::reset();

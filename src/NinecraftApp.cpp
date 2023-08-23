@@ -4,6 +4,7 @@
 #include "client/input/mouse/Mouse.h"
 #include "math/Mth.h"
 #include "material/Material.h"
+#include "client/gui/ScreenChooser.h"
 
 bool NinecraftApp::_hasInitedStatics = false;
 
@@ -14,11 +15,7 @@ NinecraftApp::NinecraftApp() {
 void NinecraftApp::initGLStates() {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-    #ifndef USE_DESKTOP_GL
-	glDepthRangef(0, 1.0);
-    #else
-    glDepthRange(0, 1.0);
-    #endif
+	glDepthRangef(0, 1.0f);
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.1);
 	glEnable(GL_CULL_FACE);
@@ -50,6 +47,7 @@ void NinecraftApp::init() {
 	initGLStates();
 	Tesselator::instance.init();
 	Minecraft::init();
+    this->screenChooser.setScreen(START_MENU);
 }
 
 void NinecraftApp::update() {
