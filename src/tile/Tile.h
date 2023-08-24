@@ -100,4 +100,18 @@ public:
     void setLightEmission(float lightEmission);
 
     void setLightBlock(int32_t lightBlock);
+
+    void setExplodeable(float power);
+
+    void setDestroyTime(float time);
+
+    void setDescriptionId(const std::string& name);
+
+    void prepareRender(Level *level, int32_t x, int32_t y, int32_t z);
+
+    void playerDestroy(Level *level, void *player, int32_t x, int32_t y, int32_t z, int32_t data);
+
+    void onRemove(Level *level, int32_t x, int32_t y, int32_t z);
+
+    void onPlace(Level *level, int32_t x, int32_t y, int32_t z);
 };
