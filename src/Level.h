@@ -3,8 +3,9 @@
 #include "LevelListener.h"
 #include <vector>
 #include <algorithm>
+#include "LevelSource.h"
 
-class Level {
+class Level : public LevelSource {
 public:
 	std::vector<LevelListener *> listeners; // 2564
 

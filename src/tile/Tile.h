@@ -6,6 +6,7 @@
 #include "../Level.h"
 #include "../math/Random.h"
 #include "../entity/Entity.h"
+#include "../LevelSource.h"
 
 class Tile {
 public:
@@ -67,7 +68,7 @@ public:
 
     int32_t use(Level *level, int32_t x, int32_t y, int32_t z, void *player);
 
-    void updateShape(void *levelSource, int32_t x, int32_t y, int32_t z);
+    void updateShape(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
 
     void updateDefaultShape();
 
@@ -85,7 +86,7 @@ public:
 
     int32_t spawnBurnResources(Level *level, float x, float y, float z);
 
-    bool shouldRenderFace(void *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
+    bool shouldRenderFace(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
 
     void setTicking(bool ticking);
 
@@ -114,4 +115,88 @@ public:
     void onRemove(Level *level, int32_t x, int32_t y, int32_t z);
 
     void onPlace(Level *level, int32_t x, int32_t y, int32_t z);
+
+    void neighborChanged(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+
+    bool mayPlace(Level *level, int32_t x, int32_t y, int32_t z);
+
+    bool mayPick();
+
+    bool mayPick(int32_t unknown0, bool unknown1);
+
+    bool isSolidRender();
+
+    bool isSignalSource();
+
+    bool isFaceVisible(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+
+    bool isCubeShaped();
+
+    void initTiles();
+
+    void init();
+
+    void handleEntityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity, Vec3 &vector);
+
+    AABB getTileAABB(Level *level, int32_t x, int32_t y, int32_t z);
+
+    int32_t getTickDelay();
+
+    int32_t getTexture(int32_t face, int32_t data);
+
+    int32_t getTexture(int32_t face);
+
+    int32_t getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
+
+    int32_t getSpawnResourcesAuxValue(int32_t unknown0);
+
+    int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
+
+    int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+
+    int32_t getResourceCount(Random *random);
+
+    int32_t getResource(int32_t data, Random *random);
+
+    int32_t getRenderShape();
+
+    int32_t getRenderLayer();
+
+    std::string getName();
+
+    float getExplosionResistance(Entity * entity);
+
+    float getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+
+    float getDestroyProgress(void *player);
+
+    std::string getDescriptionId();
+
+    int32_t getColor(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+
+    float getBrightness(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+
+    AABB *getAABB(Level *level, int32_t x, int32_t y, int32_t z);
+
+    void entityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity);
+
+    void destroy(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+
+    bool containsX(const Vec3& vector);
+
+    bool containsY(const Vec3& vector);
+
+    bool containsZ(const Vec3& vector);
+
+    HitResult clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3& vector1, Vec3& vector2);
+
+    bool canSurvive(Level *level, int32_t x, int32_t y, int32_t z);
+
+    void attack(Level *level, int32_t x, int32_t y, int32_t z, void *player);
+
+    void animateTick(Level *level, int32_t x, int32_t y, int32_t z, Random *random);
+
+    void addLights(Level *level, int32_t x, int32_t y, int32_t z);
+
+    void addAABBs(Level *level, int32_t x, int32_t y, int32_t z, const AABB *aabb, std::vector<AABB>& aabbs);
 };
