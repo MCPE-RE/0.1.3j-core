@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "../I18n.h"
 
 Tile::SoundType::SoundType(const std::string& name, float volume, float pitch) {
     this->name = name;
@@ -317,48 +318,110 @@ int32_t Tile::getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t
 int32_t Tile::getSpawnResourcesAuxValue(int32_t unknown0) {
     return 0;
 }
-/*
-int32_t Tile::getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face) {}
 
-int32_t Tile::getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+int32_t Tile::getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face) {
+    return 0;
+}
 
-int32_t Tile::getResourceCount(Random *random) {}
+int32_t Tile::getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {
+    return 0;
+}
 
-int32_t Tile::getResource(int32_t data, Random *random) {}
+int32_t Tile::getResourceCount(Random *random) {
+    return 1;
+}
 
-int32_t Tile::getRenderShape() {}
+int32_t Tile::getResource(int32_t data, Random *random) {
+    return this->resource;
+}
 
-int32_t Tile::getRenderLayer() {}
+int32_t Tile::getRenderShape() {
+    return 0;
+}
 
-std::string Tile::getName() {}
+int32_t Tile::getRenderLayer() {
+    return 0;
+}
 
-float Tile::getExplosionResistance(Entity * entity) {}
+std::string Tile::getName() {
+    return I18n::get(this->getDescriptionId() + ".name");
+}
 
-float Tile::getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {}
+float Tile::getExplosionResistance(Entity *entity) {
+    return this->blastResistance / 5.0f;
+}
 
-float Tile::getDestroyProgress(Player *player) {}
+int32_t Tile::getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {
+    return 0;
+}
 
-std::string Tile::getDescriptionId() {}
+float Tile::getDestroyProgress(Player *player) {
+    if (this->hardness >= 0.0f) {
+        /*if (player->canDestroy(this) != 1) {
+            return (1.0f / this->hardness) / 100.0f;
+        }
+        return (player->getDestroySpeed(this) / this->hardness) / 30.0f;*/
+    }
+    return 0.0f;
+}
 
-int32_t Tile::getColor(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+std::string Tile::getDescriptionId() {
+    return this->descriptionId;
+}
 
-float Tile::getBrightness(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+int32_t Tile::getColor(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {
+    return 0xFFFFFF;
+}
 
-AABB *Tile::getAABB(Level *level, int32_t x, int32_t y, int32_t z) {}
+float Tile::getBrightness(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {
+    return levelSource->getBrightness(x, y, z);
+}
+
+AABB *Tile::getAABB(Level *level, int32_t x, int32_t y, int32_t z) {
+    this->aabb.minX = (float)x + this->shapeMinX;
+    this->aabb.minY = (float)y + this->shapeMinY;
+    this->aabb.minZ = (float)z + this->shapeMinZ;
+    this->aabb.maxX = (float)x + this->shapeMaxX;
+    this->aabb.maxY = (float)y + this->shapeMaxY;
+    this->aabb.maxZ = (float)z + this->shapeMaxZ;
+    return &this->aabb;
+}
 
 void Tile::entityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity) {}
 
 void Tile::destroy(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {}
 
-bool Tile::containsX(const Vec3& vector) {}
+bool Tile::containsX(const Vec3& vector) {
+    return
+        vector.y >= this->shapeMinY &&
+        vector.y <= this->shapeMaxY &&
+        vector.z >= this->shapeMinZ &&
+        vector.z <= this->shapeMaxZ;
+}
 
-bool Tile::containsY(const Vec3& vector) {}
+bool Tile::containsY(const Vec3& vector) {
+    return
+        vector.x >= this->shapeMinX &&
+        vector.x <= this->shapeMaxX &&
+        vector.z >= this->shapeMinZ &&
+        vector.z <= this->shapeMaxZ;
+}
 
-bool Tile::containsZ(const Vec3& vector) {}
+bool Tile::containsZ(const Vec3& vector) {
+    return
+        vector.x >= this->shapeMinX &&
+        vector.x <= this->shapeMaxX &&
+        vector.y >= this->shapeMinY &&
+        vector.y <= this->shapeMaxY;
+}
+/*
+HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3& vector1, Vec3& vector2) {
+    // TODO
+}*/
 
-HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3& vector1, Vec3& vector2) {}
-
-bool Tile::canSurvive(Level *level, int32_t x, int32_t y, int32_t z) {}
+bool Tile::canSurvive(Level *level, int32_t x, int32_t y, int32_t z) {
+    return true;
+}
 
 void Tile::attack(Level *level, int32_t x, int32_t y, int32_t z, Player *player) {}
 
@@ -366,5 +429,9 @@ void Tile::animateTick(Level *level, int32_t x, int32_t y, int32_t z, Random *ra
 
 void Tile::addLights(Level *level, int32_t x, int32_t y, int32_t z) {}
 
-void Tile::addAABBs(Level *level, int32_t x, int32_t y, int32_t z, const AABB *aabb, std::vector<AABB>& aabbs) {}
-*/
+void Tile::addAABBs(Level *level, int32_t x, int32_t y, int32_t z, const AABB *aabb, std::vector<AABB>& aabbs) {
+    AABB *boundingBox = this->getAABB(level, x, y, z);
+    if (boundingBox && aabb->intersects(*boundingBox)) {
+        aabbs.push_back(*boundingBox);
+    }
+}

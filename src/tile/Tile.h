@@ -169,9 +169,9 @@ public:
 
     std::string getName();
 
-    float getExplosionResistance(Entity * entity);
+    float getExplosionResistance(Entity *entity);
 
-    float getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+    int32_t getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
     float getDestroyProgress(Player *player);
 
