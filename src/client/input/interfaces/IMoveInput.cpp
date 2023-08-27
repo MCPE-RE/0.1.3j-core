@@ -16,4 +16,4 @@ void IMoveInput::setKey(int32_t key, bool isPressed) {}
 
 void IMoveInput::setScreenSize(int32_t width, int32_t height) {}
 
-void IMoveInput::tick(void *player) {}
+void IMoveInput::tick(Player *player) {}

@@ -26,6 +26,9 @@ Tile *Tile::tiles[256];
 bool Tile::shouldTick[256];
 int32_t Tile::lightEmission[256];
 int32_t Tile::lightBlock[256];
+bool Tile::solid[256];
+bool Tile::translucent[256];
+bool Tile::isEntityTile[256];
 std::string Tile::TILE_DESCRIPTION_PREFIX = "tile.";
 Tile::SoundType Tile::SOUND_NORMAL = Tile::SoundType("stone", 1.0f, 1.0f);
 Tile::SoundType Tile::SOUND_WOOD = Tile::SoundType("wood", 1.0f, 1.0f);
@@ -49,7 +52,7 @@ Tile::Tile(int32_t resource, const Material *material) : aabb(0.0f, 0.0f, 0.0f, 
     this->shapeMaxZ = 1.0f;
     this->soundType = &Tile::SOUND_NORMAL;
     this->particleGravity = 1.0f;
-    this->material = material;
+    this->material = (Material *)material;
     this->friction = 0.6f;
     this->descriptionId = "";
     if (Tile::tiles[this->resource]) {
@@ -73,7 +76,7 @@ Tile::Tile(int32_t resource, int32_t texture, const Material *material) : aabb(0
     this->shapeMaxZ = 1.0f;
     this->soundType = &Tile::SOUND_NORMAL;
     this->particleGravity = 1.0f;
-    this->material = material;
+    this->material = (Material *)material;
     this->friction = 0.6f;
     this->descriptionId = "";
     if (Tile::tiles[this->resource]) {
@@ -85,3 +88,283 @@ Tile::Tile(int32_t resource, int32_t texture, const Material *material) : aabb(0
         );
     }
 }
+
+void Tile::wasExploded(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+int32_t Tile::use(Level *level, int32_t x, int32_t y, int32_t z, Player *player) {
+    return 0;
+}
+
+void Tile::updateShape(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::updateDefaultShape() {}
+
+void Tile::triggerEvent(Level *level, int32_t x, int32_t y, int32_t z, int32_t a, int32_t b) {}
+
+void Tile::tick(Level *level, int32_t x, int32_t y, int32_t z, Random *random) {}
+
+void Tile::teardownTiles() {
+    for (int i = 0; i < 256; ++i) {
+        if (Tile::tiles[i]) {
+            delete Tile::tiles[i];
+        }
+    }
+}
+
+void Tile::stepOn(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity) {}
+
+void Tile::spawnResources(Level *level, int32_t x, int32_t y, int32_t z , int32_t data, float chance) {}
+
+void Tile::spawnResources(Level *level, int32_t x, int32_t y, int32_t z , int32_t data) {
+    this->spawnResources(level, x, y, z, data, 1.0f);
+}
+
+int32_t Tile::spawnBurnResources(Level *level, float x, float y, float z) {
+    return 0;
+}
+
+bool Tile::shouldRenderFace(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face) {
+    if (!face && y == -1) {
+        return false;
+    }
+    if (face == 2 && z == -1) {
+        return false;
+    }
+    if (face == 3 && z == 257) {
+        return false;
+    }
+    if (face == 4 && x == -1) {
+        return false;
+    }
+    if (face == 5 && x == 257) {
+        return false;
+    }
+    if (!face && this->shapeMinY > 0.0f) {
+        return true;
+    }
+    if (face == 1 && this->shapeMaxY < 1.0f) {
+        return true;
+    }
+    if (face == 2 && this->shapeMinZ > 0.0f) {
+        return true;
+    }
+    if (face == 3 && this->shapeMaxZ < 1.0f) {
+        return true;
+    }
+    if (face == 4 && this->shapeMinX > 0.0f) {
+        return true;
+    }
+    if (face == 5 && this->shapeMaxX < 1.0f) {
+        return true;
+    }
+    Tile *tile = Tile::tiles[levelSource->getTile(x, y, z)];
+    if (!tile) {
+        return true;
+    }
+    //if (face == 1 && tile->resource == Tile::topSnow->resource) {
+    //    return false;
+    //}
+}
+
+void Tile::setTicking(bool ticking) {
+    Tile::shouldTick[this->resource] = ticking;
+}
+
+void Tile::setSoundType(const Tile::SoundType& soundType) {
+    this->soundType = (Tile::SoundType *)&soundType;
+}
+
+void Tile::setShape(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    this->shapeMinX = minX;
+    this->shapeMinY = minY;
+    this->shapeMinZ = minZ;
+    this->shapeMaxX = maxX;
+    this->shapeMaxY = maxY;
+    this->shapeMaxZ = maxZ;
+}
+
+void Tile::setPlacedOnFace(Level *level, float x, float y, float z, int32_t face) {}
+
+void Tile::setPlacedBy(Level *level, int32_t x, int32_t y, int32_t z, Mob *mob) {}
+
+void Tile::setLightEmission(float lightEmission) {
+    Tile::lightEmission[this->resource] = (int32_t)(lightEmission * 15.0f);
+}
+
+void Tile::setLightBlock(int32_t lightBlock) {
+    Tile::lightBlock[this->resource] = lightBlock;
+}
+
+void Tile::setExplodeable(float power) {
+    this->blastResistance = power * 3.0f;
+}
+
+void Tile::setDestroyTime(float time) {
+    this->hardness = time;
+    if (this->blastResistance < time * 5.0f) {
+        this->blastResistance = time * 5.0f;
+    }
+}
+
+void Tile::setDescriptionId(const std::string& name) {
+    this->descriptionId = Tile::TILE_DESCRIPTION_PREFIX + name;
+}
+
+void Tile::prepareRender(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::playerDestroy(Level *level, Player *player, int32_t x, int32_t y, int32_t z, int32_t data) {
+    this->spawnResources(level, x, y, z, data);
+}
+
+void Tile::onRemove(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::onPlace(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::neighborChanged(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {}
+
+bool Tile::mayPlace(Level *level, int32_t x, int32_t y, int32_t z) {
+    uint8_t tile = level->getTile(x, y, z);
+    return !tile || Tile::tiles[tile]->material->isLiquid();
+}
+
+bool Tile::mayPick() {
+    return true;
+}
+
+bool Tile::mayPick(int32_t unknown0, bool unknown1) {
+    return this->mayPick();
+}
+
+bool Tile::isSolidRender() {
+    return true;
+}
+
+bool Tile::isSignalSource() {
+    return false;
+}
+
+bool Tile::isFaceVisible(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {
+    if (face == 0) {
+        --y;
+    } else if (face == 1) {
+        ++y;
+    } else if (face == 2) {
+        --z;
+    } else if (face == 3) {
+        ++z;
+    } else if (face == 4) {
+        --x;
+    } else if (face == 5) {
+        ++x;
+    }
+    return level->isSolidTile(x, y, z);
+}
+
+bool Tile::isCubeShaped() {
+    return true;
+}
+
+void Tile::initTiles() {
+    // TODO LAST
+}
+
+void Tile::init() {
+    Tile::tiles[this->resource] = this;
+    this->setShape(
+        this->shapeMinX,
+        this->shapeMinY,
+        this->shapeMinZ,
+        this->shapeMaxX,
+        this->shapeMaxY,
+        this->shapeMaxZ
+    ); // hmm, why this?
+    Tile::solid[this->resource] = this->isSolidRender();
+    Tile::lightBlock[this->resource] = Tile::solid[this->resource] ? 255 : 0;
+    Tile::translucent[this->resource] = !this->material->blocksLight();
+    Tile::isEntityTile[this->resource] = false;
+}
+
+void Tile::handleEntityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity, Vec3 &vector) {}
+
+AABB Tile::getTileAABB(Level *level, int32_t x, int32_t y, int32_t z) {
+    return AABB(
+        (float)x + this->shapeMinX,
+        (float)y + this->shapeMinY,
+        (float)z + this->shapeMinZ,
+        (float)x + this->shapeMaxX,
+        (float)y + this->shapeMaxY,
+        (float)z + this->shapeMaxZ
+    );
+}
+
+int32_t Tile::getTickDelay() {
+    return 10;
+}
+
+int32_t Tile::getTexture(int32_t face, int32_t data) {
+    return this->getTexture(face);
+}
+
+int32_t Tile::getTexture(int32_t face) {
+    return this->texture;
+}
+
+int32_t Tile::getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face) {
+    int32_t data = levelSource->getData(x, y, z);
+    return this->getTexture(face, data);
+}
+
+int32_t Tile::getSpawnResourcesAuxValue(int32_t unknown0) {
+    return 0;
+}
+/*
+int32_t Tile::getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face) {}
+
+int32_t Tile::getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+
+int32_t Tile::getResourceCount(Random *random) {}
+
+int32_t Tile::getResource(int32_t data, Random *random) {}
+
+int32_t Tile::getRenderShape() {}
+
+int32_t Tile::getRenderLayer() {}
+
+std::string Tile::getName() {}
+
+float Tile::getExplosionResistance(Entity * entity) {}
+
+float Tile::getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {}
+
+float Tile::getDestroyProgress(Player *player) {}
+
+std::string Tile::getDescriptionId() {}
+
+int32_t Tile::getColor(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+
+float Tile::getBrightness(LevelSource *levelSource, int32_t x, int32_t y, int32_t z) {}
+
+AABB *Tile::getAABB(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::entityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity) {}
+
+void Tile::destroy(Level *level, int32_t x, int32_t y, int32_t z, int32_t face) {}
+
+bool Tile::containsX(const Vec3& vector) {}
+
+bool Tile::containsY(const Vec3& vector) {}
+
+bool Tile::containsZ(const Vec3& vector) {}
+
+HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3& vector1, Vec3& vector2) {}
+
+bool Tile::canSurvive(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::attack(Level *level, int32_t x, int32_t y, int32_t z, Player *player) {}
+
+void Tile::animateTick(Level *level, int32_t x, int32_t y, int32_t z, Random *random) {}
+
+void Tile::addLights(Level *level, int32_t x, int32_t y, int32_t z) {}
+
+void Tile::addAABBs(Level *level, int32_t x, int32_t y, int32_t z, const AABB *aabb, std::vector<AABB>& aabbs) {}
+*/

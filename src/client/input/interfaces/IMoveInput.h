@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "../../../entity/Player.h"
 
 class IMoveInput {
 public:
@@ -20,5 +21,5 @@ public:
 
     virtual void setScreenSize(int32_t width, int32_t height);
 
-    virtual void tick(void *player);
+    virtual void tick(Player *player);
 };

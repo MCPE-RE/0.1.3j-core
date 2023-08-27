@@ -106,7 +106,7 @@ void SoundEngine::playUI(const std::string& name, float volume, float pitch) {
     }
 }
 
-void SoundEngine::update(Entity *mob, float angle) {
+void SoundEngine::update(Mob *mob, float angle) {
     if (this->options->soundVolume != 0.0f) {
         if (mob) {
             this->posX = mob->prevPosX + ((mob->posX - mob->prevPosX) * angle);

@@ -41,14 +41,12 @@ Button::Button(int32_t buttonId, const std::string& name) {
 }
 
 bool Button::clicked(Minecraft *mc, int32_t x, int32_t y) {
-    if (
-        !this->isUsable ||
-        x < this->x || y < this->y ||
-        this->x + this->width <= x || this->y + this->height <= y
-    ) {
-        return false;
-    }
-    return true;
+    return
+        this->isUsable &&
+        this->x <= x &&
+        this->y <= y &&
+        this->x + this->width > x &&
+        this->y + this->height > y;
 }
 
 int32_t Button::getYImage(bool isHovered) {

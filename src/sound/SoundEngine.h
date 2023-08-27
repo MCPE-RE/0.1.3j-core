@@ -6,7 +6,7 @@
 #include <cstdint>
 #include "SoundRepository.h"
 #include "../Options.h"
-#include "../entity/Entity.h"
+#include "../entity/Mob.h"
 
 class Minecraft;
 
@@ -38,5 +38,5 @@ public:
 
     void playUI(const std::string& name, float volume, float pitch);
 
-    void update(Entity *mob, float angle);
+    void update(Mob *mob, float angle);
 };

@@ -6,6 +6,7 @@
 #include "TouchAreaModel.h"
 #include "../../Options.h"
 #include "PolygonArea.h"
+#include "../../entity/Player.h"
 
 class Minecraft;
 
@@ -39,5 +40,5 @@ public:
 
     void setScreenSize(int32_t width, int32_t height);
     
-    void tick(void *player);
+    void tick(Player *player);
 };

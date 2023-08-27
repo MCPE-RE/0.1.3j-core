@@ -6,6 +6,8 @@
 #include "../Level.h"
 #include "../math/Random.h"
 #include "../entity/Entity.h"
+#include "../entity/Mob.h"
+#include "../entity/Player.h"
 #include "../LevelSource.h"
 
 class Tile {
@@ -31,6 +33,9 @@ public:
     static bool shouldTick[256];
     static int32_t lightEmission[256];
     static int32_t lightBlock[256];
+    static bool solid[256];
+    static bool translucent[256];
+    static bool isEntityTile[256];
     static std::string TILE_DESCRIPTION_PREFIX;
     static SoundType SOUND_NORMAL;
     static SoundType SOUND_WOOD;
@@ -53,7 +58,7 @@ public:
     float shapeMaxZ; // 32;
     SoundType *soundType; // 36
     float particleGravity; // 40
-    const Material *material; // 44
+    Material *material; // 44
     float friction; // 48
     float hardness; // 52
     float blastResistance; // 56
@@ -66,7 +71,7 @@ public:
 
     void wasExploded(Level *level, int32_t x, int32_t y, int32_t z);
 
-    int32_t use(Level *level, int32_t x, int32_t y, int32_t z, void *player);
+    int32_t use(Level *level, int32_t x, int32_t y, int32_t z, Player *player);
 
     void updateShape(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
 
@@ -96,7 +101,7 @@ public:
 
     void setPlacedOnFace(Level *level, float x, float y, float z, int32_t face);
 
-    void setPlacedBy(Level *level, int32_t x, int32_t y, int32_t z, void *mob);
+    void setPlacedBy(Level *level, int32_t x, int32_t y, int32_t z, Mob *mob);
 
     void setLightEmission(float lightEmission);
 
@@ -110,7 +115,7 @@ public:
 
     void prepareRender(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void playerDestroy(Level *level, void *player, int32_t x, int32_t y, int32_t z, int32_t data);
+    void playerDestroy(Level *level, Player *player, int32_t x, int32_t y, int32_t z, int32_t data);
 
     void onRemove(Level *level, int32_t x, int32_t y, int32_t z);
 
@@ -128,7 +133,7 @@ public:
 
     bool isSignalSource();
 
-    bool isFaceVisible(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+    static bool isFaceVisible(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
     bool isCubeShaped();
 
@@ -168,7 +173,7 @@ public:
 
     float getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    float getDestroyProgress(void *player);
+    float getDestroyProgress(Player *player);
 
     std::string getDescriptionId();
 
@@ -192,7 +197,7 @@ public:
 
     bool canSurvive(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void attack(Level *level, int32_t x, int32_t y, int32_t z, void *player);
+    void attack(Level *level, int32_t x, int32_t y, int32_t z, Player *player);
 
     void animateTick(Level *level, int32_t x, int32_t y, int32_t z, Random *random);
 

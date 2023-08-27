@@ -139,7 +139,7 @@ void UnifiedTurnBuild::setScreenSize(int32_t width, int32_t height) {
     this->touchAreaModel.addArea(100, &this->includeExcludeArea);
 }
 
-bool UnifiedTurnBuild::tickBuild(void *player, void *buildActionIntention) {
+bool UnifiedTurnBuild::tickBuild(Player *player, void *buildActionIntention) {
     if (this->unknown_216 == 3) {
         if (!this->unknown_36) {
             //*buildActionIntention = BuildActionIntention(10);

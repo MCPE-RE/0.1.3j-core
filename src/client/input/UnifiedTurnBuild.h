@@ -9,6 +9,7 @@
 #include "IncludeExcludeArea.h"
 #include "TurnDelta.h"
 #include "../../entity/Entity.h"
+#include "../../entity/Player.h"
 
 class UnifiedTurnBuild : public ITurnInput, public IBuildInput {
 public:
@@ -32,7 +33,7 @@ public:
     uint32_t unknown_188;
     float x; // 192
     float y; // 196
-    Entity *player; // 200
+    Player *player; // 200
     float unknown_204;
     uint32_t unknown_208;
     uint8_t unknown_212;
@@ -48,5 +49,5 @@ public:
 
     void setScreenSize(int32_t width, int32_t height);
 
-    bool tickBuild(void *player, void *buildActionIntention);
+    bool tickBuild(Player *player, void *buildActionIntention);
 };

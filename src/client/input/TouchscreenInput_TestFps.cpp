@@ -608,7 +608,7 @@ int __fastcall TouchscreenInput_TestFps::tick(TouchscreenInput_TestFps *this, Pl
   return result;
 }
 */
-void TouchscreenInput_TestFps::tick(void *player) {
+void TouchscreenInput_TestFps::tick(Player *player) {
     this->x = 0;
     this->y = 0;
     this->unknown2 = 0;
