@@ -193,7 +193,7 @@ public:
 
     bool containsZ(const Vec3& vector);
 
-    HitResult clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3& vector1, Vec3& vector2);
+    HitResult clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3 vector1, Vec3 vector2);
 
     bool canSurvive(Level *level, int32_t x, int32_t y, int32_t z);
 

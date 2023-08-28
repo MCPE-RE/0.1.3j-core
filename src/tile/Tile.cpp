@@ -414,10 +414,103 @@ bool Tile::containsZ(const Vec3& vector) {
         vector.y >= this->shapeMinY &&
         vector.y <= this->shapeMaxY;
 }
-/*
-HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3& vector1, Vec3& vector2) {
-    // TODO
-}*/
+
+HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3 vector1, Vec3 vector2) {
+    Vec3 clipMinX;
+    Vec3 clipMinY;
+    Vec3 clipMinZ;
+    Vec3 clipMaxX;
+    Vec3 clipMaxY;
+    Vec3 clipMaxZ;
+
+    this->updateShape(level, x, y, z);
+
+    vector1 = vector1.add(-x, -y, -z);
+    vector2 = vector2.add(-x, -y, -z);
+    
+    bool hasClipMinX = vector1.clipX(vector2, this->shapeMinX, clipMinX);
+    bool hasClipMaxX = vector1.clipX(vector2, this->shapeMaxX, clipMaxX);
+    bool hasClipMinY = vector1.clipY(vector2, this->shapeMinY, clipMinY);
+    bool hasClipMaxY = vector1.clipY(vector2, this->shapeMaxY, clipMaxY);
+    bool hasClipMinZ = vector1.clipZ(vector2, this->shapeMinZ, clipMinZ);
+    bool hasClipMaxZ = vector1.clipZ(vector2, this->shapeMaxZ, clipMaxZ);
+
+    if (!hasClipMinX || !this->containsX(clipMinX)) {
+        hasClipMinX = false;
+    }
+    if (!hasClipMinY || !this->containsX(clipMinY)) {
+        hasClipMinY = false;
+    }
+    if (!hasClipMinY || !this->containsY(clipMinY)) {
+        hasClipMinY = false;
+    }
+    if (!hasClipMinY || !this->containsY(clipMinY)) {
+        hasClipMinY = false;
+    }
+    if (!hasClipMinZ || !this->containsZ(clipMinZ)) {
+        hasClipMinZ = false;
+    }
+    if (!hasClipMinZ || !this->containsZ(clipMinZ)) {
+        hasClipMinZ = false;
+    }
+
+    Vec3 *vector = nullptr;
+
+    if (hasClipMinX) {
+        if (!vector || vector1.distanceToSqr(clipMinX) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMinX;
+        }
+    }
+    if (hasClipMaxX) {
+        if (!vector || vector1.distanceToSqr(clipMaxX) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMaxX;
+        }
+    }
+    if (hasClipMinY) {
+        if (!vector || vector1.distanceToSqr(clipMinY) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMinY;
+        }
+    }
+    if (hasClipMaxY) {
+        if (!vector || vector1.distanceToSqr(clipMaxY) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMaxY;
+        }
+    }
+    if (hasClipMinZ) {
+        if (!vector || vector1.distanceToSqr(clipMinZ) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMinZ;
+        }
+    }
+    if (hasClipMaxZ) {
+        if (!vector || vector1.distanceToSqr(clipMaxZ) < vector1.distanceToSqr(*vector)) {
+            vector = &clipMaxZ;
+        }
+    }
+
+    if (vector) {
+        int32_t side = -1;
+        if (vector == &clipMinX) {
+            side = 4;
+        }
+        if (vector == &clipMaxX) {
+            side = 5;
+        }
+        if (vector == &clipMinY) {
+            side = 0;
+        }
+        if (vector == &clipMaxY) {
+            side = 1;
+        }
+        if (vector == &clipMinZ) {
+            side = 2;
+        }
+        if (vector == &clipMaxZ) {
+            side = 3;
+        }
+        return HitResult(x, y, z, side, vector->add(x, y, z));
+    }
+    return HitResult();
+}
 
 bool Tile::canSurvive(Level *level, int32_t x, int32_t y, int32_t z) {
     return true;
