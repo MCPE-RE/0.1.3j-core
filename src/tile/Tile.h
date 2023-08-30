@@ -69,123 +69,123 @@ public:
 
     Tile(int32_t resource, int32_t texture, const Material *material);
 
-    void wasExploded(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual void wasExploded(Level *level, int32_t x, int32_t y, int32_t z);
 
-    int32_t use(Level *level, int32_t x, int32_t y, int32_t z, Player *player);
+    virtual int32_t use(Level *level, int32_t x, int32_t y, int32_t z, Player *player);
 
-    void updateShape(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+    virtual void updateShape(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
 
-    void updateDefaultShape();
+    virtual void updateDefaultShape();
 
-    void triggerEvent(Level *level, int32_t x, int32_t y, int32_t z, int32_t a, int32_t b);
+    virtual void triggerEvent(Level *level, int32_t x, int32_t y, int32_t z, int32_t a, int32_t b);
 
-    void tick(Level *level, int32_t x, int32_t y, int32_t z, Random *random);
+    virtual void tick(Level *level, int32_t x, int32_t y, int32_t z, Random *random);
 
     void teardownTiles();
 
-    void stepOn(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity);
+    virtual void stepOn(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity);
 
-    void spawnResources(Level *level, int32_t x, int32_t y, int32_t z , int32_t data, float chance);
+    virtual void spawnResources(Level *level, int32_t x, int32_t y, int32_t z , int32_t data, float chance);
 
-    void spawnResources(Level *level, int32_t x, int32_t y, int32_t z , int32_t data);
+    virtual void spawnResources(Level *level, int32_t x, int32_t y, int32_t z , int32_t data);
 
-    int32_t spawnBurnResources(Level *level, float x, float y, float z);
+    virtual int32_t spawnBurnResources(Level *level, float x, float y, float z);
 
-    bool shouldRenderFace(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
+    virtual bool shouldRenderFace(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    void setTicking(bool ticking);
+    virtual void setTicking(bool ticking);
 
-    void setSoundType(const Tile::SoundType& soundType);
+    virtual void setSoundType(const Tile::SoundType& soundType);
 
-    void setShape(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
+    virtual void setShape(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
 
-    void setPlacedOnFace(Level *level, float x, float y, float z, int32_t face);
+    virtual void setPlacedOnFace(Level *level, float x, float y, float z, int32_t face);
 
-    void setPlacedBy(Level *level, int32_t x, int32_t y, int32_t z, Mob *mob);
+    virtual void setPlacedBy(Level *level, int32_t x, int32_t y, int32_t z, Mob *mob);
 
-    void setLightEmission(float lightEmission);
+    virtual void setLightEmission(float lightEmission);
 
-    void setLightBlock(int32_t lightBlock);
+    virtual void setLightBlock(int32_t lightBlock);
 
-    void setExplodeable(float power);
+    virtual void setExplodeable(float power);
 
-    void setDestroyTime(float time);
+    virtual void setDestroyTime(float time);
 
-    void setDescriptionId(const std::string& name);
+    virtual void setDescriptionId(const std::string& name);
 
-    void prepareRender(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual void prepareRender(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void playerDestroy(Level *level, Player *player, int32_t x, int32_t y, int32_t z, int32_t data);
+    virtual void playerDestroy(Level *level, Player *player, int32_t x, int32_t y, int32_t z, int32_t data);
 
-    void onRemove(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual void onRemove(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void onPlace(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual void onPlace(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void neighborChanged(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+    virtual void neighborChanged(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    bool mayPlace(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual bool mayPlace(Level *level, int32_t x, int32_t y, int32_t z);
 
-    bool mayPick();
+    virtual bool mayPick();
 
-    bool mayPick(int32_t unknown0, bool unknown1);
+    virtual bool mayPick(int32_t unknown0, bool unknown1);
 
-    bool isSolidRender();
+    virtual bool isSolidRender();
 
-    bool isSignalSource();
+    virtual bool isSignalSource();
 
     static bool isFaceVisible(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    bool isCubeShaped();
+    virtual bool isCubeShaped();
 
     void initTiles();
 
     void init();
 
-    void handleEntityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity, Vec3 &vector);
+    virtual void handleEntityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity, Vec3 &vector);
 
-    AABB getTileAABB(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual AABB getTileAABB(Level *level, int32_t x, int32_t y, int32_t z);
 
-    int32_t getTickDelay();
+    virtual int32_t getTickDelay();
 
-    int32_t getTexture(int32_t face, int32_t data);
+    virtual int32_t getTexture(int32_t face, int32_t data);
 
-    int32_t getTexture(int32_t face);
+    virtual int32_t getTexture(int32_t face);
 
-    int32_t getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
+    virtual int32_t getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    int32_t getSpawnResourcesAuxValue(int32_t unknown0);
+    virtual int32_t getSpawnResourcesAuxValue(int32_t unknown0);
 
-    int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
+    virtual int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+    virtual int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
 
-    int32_t getResourceCount(Random *random);
+    virtual int32_t getResourceCount(Random *random);
 
-    int32_t getResource(int32_t data, Random *random);
+    virtual int32_t getResource(int32_t data, Random *random);
 
-    int32_t getRenderShape();
+    virtual int32_t getRenderShape();
 
-    int32_t getRenderLayer();
+    virtual int32_t getRenderLayer();
 
-    std::string getName();
+    virtual std::string getName();
 
-    float getExplosionResistance(Entity *entity);
+    virtual float getExplosionResistance(Entity *entity);
 
-    int32_t getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+    virtual int32_t getDirectSignal(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    float getDestroyProgress(Player *player);
+    virtual float getDestroyProgress(Player *player);
 
-    std::string getDescriptionId();
+    virtual std::string getDescriptionId();
 
-    int32_t getColor(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+    virtual int32_t getColor(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
 
-    float getBrightness(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
+    virtual float getBrightness(LevelSource *levelSource, int32_t x, int32_t y, int32_t z);
 
-    AABB *getAABB(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual AABB *getAABB(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void entityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity);
+    virtual void entityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity);
 
-    void destroy(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
+    virtual void destroy(Level *level, int32_t x, int32_t y, int32_t z, int32_t face);
 
     bool containsX(const Vec3& vector);
 
@@ -193,15 +193,15 @@ public:
 
     bool containsZ(const Vec3& vector);
 
-    HitResult clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3 vector1, Vec3 vector2);
+    virtual HitResult clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3 vector1, Vec3 vector2);
 
-    bool canSurvive(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual bool canSurvive(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void attack(Level *level, int32_t x, int32_t y, int32_t z, Player *player);
+    virtual void attack(Level *level, int32_t x, int32_t y, int32_t z, Player *player);
 
-    void animateTick(Level *level, int32_t x, int32_t y, int32_t z, Random *random);
+    virtual void animateTick(Level *level, int32_t x, int32_t y, int32_t z, Random *random);
 
-    void addLights(Level *level, int32_t x, int32_t y, int32_t z);
+    virtual void addLights(Level *level, int32_t x, int32_t y, int32_t z);
 
-    void addAABBs(Level *level, int32_t x, int32_t y, int32_t z, const AABB *aabb, std::vector<AABB>& aabbs);
+    virtual void addAABBs(Level *level, int32_t x, int32_t y, int32_t z, const AABB *aabb, std::vector<AABB>& aabbs);
 };
