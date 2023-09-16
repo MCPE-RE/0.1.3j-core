@@ -18,8 +18,7 @@ bool CactusTile::canSurvive(Level *level, int32_t x, int32_t y, int32_t z) {
         return false;
     }
     int32_t lowerBlockResource = level->getTile(x, y - 1, z);
-    //return Tile::cactus->resource == lowerBlockResource || Tile::sand->resource == lowerBlockResource;
-    return false;
+    return Tile::cactus->resource == lowerBlockResource || Tile::sand->resource == lowerBlockResource;
 }
 
 void CactusTile::entityInside(Level *level, int32_t x, int32_t y, int32_t z, Entity *entity) {

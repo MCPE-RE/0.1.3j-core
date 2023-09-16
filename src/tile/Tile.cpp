@@ -41,6 +41,76 @@ Tile::SoundType Tile::SOUND_GLASS = Tile::SoundType("stone", 1.0f, 1.0f);
 Tile::SoundType Tile::SOUND_CLOTH = Tile::SoundType("cloth", 1.0f, 1.0f);
 Tile::SoundType Tile::SOUND_SAND = Tile::SoundType("sand", 0.45f, 1.0f);
 Tile::SoundType Tile::SOUND_SILENT = Tile::SoundType("", 0.0f, 0.0f);
+int32_t Tile::RENDERLAYER_OPAQUE = 0;
+int32_t Tile::RENDERLAYER_ALPHATEST = 1;
+int32_t Tile::RENDERLAYER_BLEND = 2;
+Tile *Tile::wood;
+Tile *Tile::water;
+Tile *Tile::wood;
+Tile *Tile::unbreakable;
+Tile *Tile::treeTrunk;
+Tile *Tile::wood;
+Tile *Tile::torch;
+Tile *Tile::topSnow;
+Tile *Tile::tnt;
+Tile *Tile::stoneSlabHalf;
+Tile *Tile::stoneBrick;
+Tile *Tile::stairs_wood;
+Tile *Tile::stairs_stone;
+Tile *Tile::sandStone;
+Tile *Tile::sand;
+Tile *Tile::rose;
+Tile *Tile::rock;
+Tile *Tile::reeds;
+Tile *Tile::redStoneOre_lit;
+Tile *Tile::redStoneOre;
+Tile *Tile::redBrick;
+Tile *Tile::obsidian;
+Tile *Tile::mushroom1;
+Tile *Tile::mushroom2;
+Tile *Tile::leaves;
+Tile *Tile::lava;
+Tile *Tile::lapisOre;
+Tile *Tile::ladder;
+Tile *Tile::ironOre;
+Tile *Tile::ironBlock;
+Tile *Tile::invisible_bedrock;
+Tile *Tile::info_updateGame1;
+Tile *Tile::info_updateGame2;
+Tile *Tile::gravel;
+Tile *Tile::grass;
+Tile *Tile::goldOre;
+Tile *Tile::goldBlock;
+Tile *Tile::glass;
+Tile *Tile::flower;
+Tile *Tile::fire;
+Tile *Tile::farmland;
+Tile *Tile::emeraldOre;
+Tile *Tile::emeraldBlock;
+Tile *Tile::door_wood;
+Tile *Tile::door_iron;
+Tile *Tile::dirt;
+Tile *Tile::coalOre;
+Tile *Tile::clay;
+Tile *Tile::calmWater;
+Tile *Tile::calmLava;
+Tile *Tile::cactus;
+Tile *Tile::cloth;
+Tile *Tile::cloth_00;
+Tile *Tile::cloth_01;
+Tile *Tile::cloth_10;
+Tile *Tile::cloth_11;
+Tile *Tile::cloth_20;
+Tile *Tile::cloth_21;
+Tile *Tile::cloth_30;
+Tile *Tile::cloth_31;
+Tile *Tile::cloth_40;
+Tile *Tile::cloth_41;
+Tile *Tile::cloth_50;
+Tile *Tile::cloth_51;
+Tile *Tile::cloth_60;
+Tile *Tile::cloth_61;
+Tile *Tile::cloth_70;
 
 Tile::Tile(int32_t resource, const Material *material) : aabb(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f) {
     this->texture = 1;
@@ -162,9 +232,10 @@ bool Tile::shouldRenderFace(LevelSource *levelSource, int32_t x, int32_t y, int3
     if (!tile) {
         return true;
     }
-    //if (face == 1 && tile->resource == Tile::topSnow->resource) {
-    //    return false;
-    //}
+    if (face == 1 && tile->resource == Tile::topSnow->resource) {
+        return false;
+    }
+    return !this->isSolidRender();
 }
 
 void Tile::setTicking(bool ticking) {
