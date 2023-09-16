@@ -221,7 +221,7 @@ public:
 
     virtual int32_t getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
 
-    virtual int32_t getSpawnResourcesAuxValue(int32_t unknown0);
+    virtual int32_t getSpawnResourcesAuxValue(int32_t auxValue);
 
     virtual int32_t getSignal(LevelSource *levelSource, int32_t x, int32_t y, int32_t z, int32_t face);
 

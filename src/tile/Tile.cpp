@@ -384,7 +384,7 @@ int32_t Tile::getTexture(LevelSource *levelSource, int32_t x, int32_t y, int32_t
     return this->getTexture(face, data);
 }
 
-int32_t Tile::getSpawnResourcesAuxValue(int32_t unknown0) {
+int32_t Tile::getSpawnResourcesAuxValue(int32_t auxValue) {
     return 0;
 }
 
