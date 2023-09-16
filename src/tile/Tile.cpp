@@ -46,10 +46,8 @@ int32_t Tile::RENDERLAYER_ALPHATEST = 1;
 int32_t Tile::RENDERLAYER_BLEND = 2;
 Tile *Tile::wood;
 Tile *Tile::water;
-Tile *Tile::wood;
 Tile *Tile::unbreakable;
 Tile *Tile::treeTrunk;
-Tile *Tile::wood;
 Tile *Tile::torch;
 Tile *Tile::topSnow;
 Tile *Tile::tnt;
@@ -496,8 +494,8 @@ HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3 vector1
 
     this->updateShape(level, x, y, z);
 
-    vector1 = vector1.add(-x, -y, -z);
-    vector2 = vector2.add(-x, -y, -z);
+    vector1 = vector1.add((float)(-x), (float)(-y), (float)(-z));
+    vector2 = vector2.add((float)(-x), (float)(-y), (float)(-z));
     
     bool hasClipMinX = vector1.clipX(vector2, this->shapeMinX, clipMinX);
     bool hasClipMaxX = vector1.clipX(vector2, this->shapeMaxX, clipMaxX);
@@ -578,7 +576,7 @@ HitResult Tile::clip(Level *level, int32_t x, int32_t y, int32_t z, Vec3 vector1
         if (vector == &clipMaxZ) {
             side = 3;
         }
-        return HitResult(x, y, z, side, vector->add(x, y, z));
+        return HitResult(x, y, z, side, vector->add((float)x, (float)y, (float)z));
     }
     return HitResult();
 }

@@ -52,10 +52,8 @@ public:
     static int32_t RENDERLAYER_BLEND;
     static Tile *wood;
     static Tile *water;
-    static Tile *wood;
     static Tile *unbreakable;
     static Tile *treeTrunk;
-    static Tile *wood;
     static Tile *torch;
     static Tile *topSnow;
     static Tile *tnt;
